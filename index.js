@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const request = require("request");
+function KgetData(pair, callback, errorHandler = err => console.log(err)) {
+    request({
+        url: `https://finance.yahoo.com/quote/${pair}=X?p=${pair}=X`,
+        encoding: null,
+    }, (err, response, html) => {
+        if (err)
+            errorHandler(err);
+        else
+            callback(parseFloat(html.toString().split('react-text: 36 -->')[1].split('<')[0].replace(',', '')));
+    });
+}
+exports.getData = getData;
+function getDataArray(pair, callback, errorHandler = err => console.log(err)) {
+    pair.map(v => request({
+        url: `https://finance.yahoo.com/quote/${v}=X?p=${v}=X`,
+        encoding: null,
+    }, (err, response, html) => {
+        if (err)
+            errorHandler(err);
+        else
+            callback(parseFloat(html.toString().split('react-text: 36 -->')[1].split('<')[0].replace(',', '')));
+    }));
+}
+exports.getDataArray = getDataArray;
+//# sourceMappingURL=index.js.map

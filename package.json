@@ -1,0 +1,12 @@
+{
+  "name": "shinjaeheon-exchange-api",
+  "description": "A simple exchange api of Yahoo Finance.",
+  "author": { "name": "Shin-JaeHeon", "email": "heoni0504@gmail.com", "url": "https://shin-jaeheon.github.io/" },
+
+  "main": "index.js",
+  "version": "0.1.0",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.83.0"
+  }
+}
