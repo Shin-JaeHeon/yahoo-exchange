@@ -11,15 +11,17 @@
 ## getDataArray(pair, callback, errorHandler): void
 ### Example
 * ``` javascript
-  getDatas(['USDKRW', 'JPYKRW'], data=>console.log(data));
+  getDataArray(['USDKRW', 'JPYKRW'], data=>console.log(data));
   // 1070
   // 970
   ```
 * ``` javascript
-  getData(['USDKRW', 'JPYKRW'], data=>console.log(data),error=>console.log('[Error]' + error));
+  getDataArray(['USDKRW', 'JPYKRW'], data=>console.log(data),error=>console.log('[Error]' + error));
   // 1070 or [Error] error message
   // 970 or [Error] error message
   ```
+### Warning
+getDataArray does not return Array to Callback.
 ## test.js
 * ``` javascript
   const index = require('../index');
