@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const request = require("request");
-function KgetData(pair, callback, errorHandler = err => console.log(err)) {
+function getData(pair, callback, errorHandler = err => console.log(err)) {
     request({
         url: `https://finance.yahoo.com/quote/${pair}=X?p=${pair}=X`,
         encoding: null,
