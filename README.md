@@ -1,4 +1,4 @@
-# shinjaeheon-exchange-api
+# yahoo-exchange
 ## getData(pair, callback, errorHandler): void
 ### Example
 * ``` javascript
@@ -24,8 +24,8 @@
 getDataArray does not return Array to Callback.
 ## test.js
 * ``` javascript
-  const index = require('../index');
+  const yahooExchange = require('yahoo-exchange');
 
-  index.getData('USDKRW', data => console.log(data));
-  index.getDataArray(['USDKRW', 'JPYKRW'], data =>console.log(data));
+  yahooExchange.getData('USDKRW', data => console.log(data));
+  yahooExchange.getDataArray(['USDKRW', 'JPYKRW'], data =>console.log(data));
   ```
