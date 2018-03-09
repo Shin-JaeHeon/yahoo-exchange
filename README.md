@@ -1,4 +1,5 @@
 # yahoo-exchange
+npm : https://www.npmjs.com/package/yahoo-exchange
 ## getData(pair, callback, errorHandler): void
 ### Example
 * ``` javascript
@@ -40,6 +41,15 @@
   ```
 ### Warning
 getDataArray does not return Array to Callback.
+##  getPairArray(currency: Array<string>, base: Array<string>): Array<string> 
+It Returns a pair array.
+### Example
+* ``` javascript
+   const currency = ['USD','JPY'];
+   const base = ['KRW'];
+   getPairArray(currency,base);
+   // ['USDKRW','JPYKRW'];
+  ```
 ## test.js
 * ``` javascript
   const yahooExchange = require('yahoo-exchange');

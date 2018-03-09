@@ -25,4 +25,13 @@ function getDataArray(pair, callback, errorHandler = err => console.log(err)) {
     }));
 }
 exports.getDataArray = getDataArray;
+function getPairArray(currency, base) {
+    let list = [];
+    currency.forEach(v => base.forEach(v2 => {
+        if (v2 !== v)
+            list.push(v + v2);
+    }));
+    return list;
+}
+exports.getPairArray = getPairArray;
 //# sourceMappingURL=index.js.map
