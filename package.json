@@ -11,7 +11,7 @@
     "email": "heoni0504@gmail.com"
   },
   "main": "index.js",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
     "request": "^2.83.0"
