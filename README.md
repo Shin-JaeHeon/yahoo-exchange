@@ -1,6 +1,6 @@
 # yahoo-exchange
 npm : https://www.npmjs.com/package/yahoo-exchange
-## getExchangeDataArray(pair, callback, errorHandler): void @deprecated
+## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string or Array\<string\>
 * callback : (Array\<number\>, pair) => any
 
