@@ -11,7 +11,7 @@ JPYKRW : NaN
 Array\<number\> : [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max, 52 Week Range Min, 52 Week Range Max]
 ### Example
 * ``` javascript
-  getExchangeDataArray('USDKRW', data => console.log(data)); // [ 1070.02, -1.77, -0.17, 1071.79, 1071.77, 1070.02, 1071.02 ]
+  getExchangeDataArray('USDKRW', data => console.log(data)); // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ]
   ```
 * ``` javascript
   getExchangeDataArray('USDKRW', data => console.log(data), error => console.log('[Error]' + error));
