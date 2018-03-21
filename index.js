@@ -7,7 +7,8 @@ const parseR = (str) => number => parseFloat(nonComma(parseReact(str, number, 1)
 const parseHTML = html => parseR(html.toString())(36);
 const parseHTML2 = (html, r) => [r(36), html.indexOf('react-text: 39 -->') === -1 ? parseFloat(parseReact(html, 38, 2).split(' ')[0]) : parseFloat(parseReact(html, 39, 1).split(' ')[0]),
     html.indexOf('react-text: 39 -->') === -1 ? parseFloat(parseReact(html, 38, 2).split('(')[1].split("\%")[0]) : parseFloat(parseReact(html, 39, 1).split('(')[1].split("\%")[0]), r(42), r(48), r(54), r(71),
-    parseFloat(html.split('data-reactid="61">')[2].split(' ')[0]), parseFloat(html.split('data-reactid="61">')[2].split(' ')[2].split('<')[0]),
+    parseFloat(nonComma(html.split('data-reactid="61">')[2].split(' ')[0])), parseFloat(nonComma(html.split('data-reactid="61">')[2].split(' ')[2].split('<')[0])),
+    parseFloat(nonComma(html.split('data-reactid="65">')[3].split(' ')[0])), parseFloat(nonComma(html.split('data-reactid="65">')[3].split(' ')[2].split('<')[0]))
 ];
 const req = (pair, errorHandler, callback) => request({
     url: `https://finance.yahoo.com/quote/${pair}=X?p=${pair}=X`,

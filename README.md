@@ -3,51 +3,47 @@ npm : https://www.npmjs.com/package/yahoo-exchange
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string or Array\<string\>
 * callback : (Array\<number\>, pair) => any
-
-Array\<number\> : [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max] 
 ### Warning!
-Bid and Ask can be returned NaN by some pair. If you find a pair that has errors, please write the pair at the following link. 
+Bid and Ask can be returned NaN by some pair. If you find a pair that has errors, please write the pair at the issue. 
 #### A known error
 JPYKRW : NaN
-### Warning!
-Day's Range can be returned always 1 by some pair. If you find a pair that has errors, please write the pair at the following link. 
-#### A known error
-USDKRW : NaN 
+
+Array\<number\> : [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max, 52 Week Range Min, 52 Week Range Max]
 ### Example
 * ``` javascript
   getExchangeDataArray('USDKRW', data => console.log(data)); // [ 1070.02, -1.77, -0.17, 1071.79, 1071.77, 1070.02, 1071.02 ]
   ```
 * ``` javascript
   getExchangeDataArray('USDKRW', data => console.log(data), error => console.log('[Error]' + error));
-  // [ 1070.12, -0.27, -0.03, 1070.39, 1070.22, 1070.12, 1071.12, 1, 1 ] or [Error] error message
+  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] or [Error] error message
   ```
 * ``` javascript
   getExchangeDataArray('USDKRW', (data,pair) => console.log(data,pair), error => console.log('[Error]' + error));
-  // [ 1070.12, -0.27, -0.03, 1070.39, 1070.22, 1070.12, 1071.12, 1, 1 ] USDRKW or [Error] error message
+  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDRKW or [Error] error message
   ```
 * ``` javascript
   getExchangeDataArray('USDKRW', (data,pair) => console.log(data,pair), (error,pair) => console.log(`[Error:${pair}]${error}`));
-   // [ 1070.12, -0.27, -0.03, 1070.39, 1070.22, 1070.12, 1071.12, 1, 1 ] USDKRW or [Error:USDKRW] error message
+   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW or [Error:USDKRW] error message
   ```
 * ``` javascript
   getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
-  // [ 1070.12, -0.27, -0.03, 1070.39, 1070.22, 1070.12, 1071.12, 1, 1 ]
-  // [ 10.046, -0.002, -0.021, 10.048, 10.047, NaN, NaN, 10.049, 10.045 ]
+  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ]
+  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ]
   ```
 * ``` javascript
   getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data), error => console.log('[Error]' + error));
-  // [ 1070.12, -0.27, -0.03, 1070.39, 1070.22, 1070.12, 1071.12, 1, 1 ] or [Error] error message
-  // [ 10.046, -0.002, -0.021, 10.048, 10.047, NaN, NaN, 10.049, 10.045 ] or [Error] error message
+  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] or [Error] error message
+  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] or [Error] error message
   ```
 * ``` javascript
    getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), error => console.log('[Error]' + error));
-   // [ 1070.12, -0.27, -0.03, 1070.39, 1070.22, 1070.12, 1071.12, 1, 1 ] USDKRW or [Error] error message
-   // [ 10.046, -0.002, -0.021, 10.048, 10.047, NaN, NaN, 10.049, 10.045 ] JPYKRW or [Error] error message
+   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW or [Error] error message
+   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW or [Error] error message
   ```
 * ``` javascript
    getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), (error,pair) => console.log(`[Error:${pair}]${error}`));
-   // [ 1070.12, -0.27, -0.03, 1070.39, 1070.22, 1070.12, 1071.12, 1, 1 ] USDKRW or [Error:USDKRW] error message
-   // [ 10.046, -0.002, -0.021, 10.048, 10.047, NaN, NaN, 10.049, 10.045 ] JPYKRW or [Error:JPYKRW] error message
+   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW or [Error:USDKRW] error message
+   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW or [Error:JPYKRW] error message
   ```
 ### Warning
 getExchangeDataArray does not return Arrays to Callback.
