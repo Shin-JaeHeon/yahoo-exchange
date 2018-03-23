@@ -2,14 +2,12 @@
 
 [![npm](https://img.shields.io/npm/v/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
 [![npm](https://img.shields.io/npm/dt/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
-[![npm](https://img.shields.io/npm/dw/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
-[![npm](https://img.shields.io/npm/dm/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
-[![npm](https://img.shields.io/npm/dy/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
 [![npm](https://img.shields.io/npm/l/yahoo-exchange.svg?registry_uri=https%3A%2F%2Fregistry.npmjs.com&style=flat-square)](https://opensource.org/licenses/MIT)
+[![npm](https://img.shields.io/badge/InternetExplorer-Not%20Support-red.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string or Array\<string\>
 * callback : (Array\<number\>, pair) => any
-* errorHandler : options (A default method is ```console.log(error)```)
+* errorHandler : options (A default method is ```console.log(error)```) 
 > ### Warning!
 >Bid and Ask can be returned NaN by some pair. If you find a pair that has errors, please write the pair at the issue. 
 #### A known error
@@ -54,6 +52,51 @@ Array\<number\> : [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask
   ```
 ### Warning
 getExchangeDataArray does not return Arrays to Callback.
+## getExchangeDataLowTraffic(callback, errorHandler): void 
+* callback : data:Array\<Array\<any\>\> => any
+* errorHandler : options (A default method is ```err => console.log(err)```) 
+### Example
+* ``` javascript
+  index.getExchangeDataLowTraffic(v => console.log(v));
+  // [['EUR/USD', 8, 143.647461, 1.709399], ... more 23 items]
+  ```
+## getExchangeDataLowTrafficP(): Promise<Array<Array<any>>>
+### Example
+* ``` javascript
+  index.getExchangeDataLowTrafficP().then(v => console.log(v))
+  // [['EUR/USD', 8, 143.647461, 1.709399], ... more 23 items]
+  ```
+
+## What is getExchangeDataLowTraffic and getExchangeDataLowTrafficP?
+It just does one request and get data of 24 pairs.
+### What pairs are available?
+ * EUR/USD
+ * USD/JPY
+ * GBP/USD
+ * AUD/USD
+ * NZD/USD
+ * EUR/JPY
+ * GBP/JPY
+ * EUR/GBP
+ * EUR/CAD
+ * EUR/SEK
+ * EUR/CHF
+ * EUR/HUF
+ * EUR/JPY
+ * USD/CNY
+ * USD/HKD
+ * USD/SGD
+ * USD/INR
+ * USD/MXN
+ * USD/PHP
+ * USD/IDR
+ * USD/THB
+ * USD/MYR
+ * USD/ZAR
+ * USD/RUB
+### What is getExchangeDataLowTrafficP?
+It returns data using Promise.
+
 ## getData(pair, callback, errorHandler): void @deprecated
 > deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
 ### Example
