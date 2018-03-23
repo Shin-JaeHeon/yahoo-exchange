@@ -54,6 +54,8 @@ function getExchangeDataArray(pair, callback, errorHandler = err => console.log(
         req(pair, errorHandler, callback);
     else if (Array.isArray(pair))
         pair.forEach(v => req(v, errorHandler, callback));
+    else
+        errorHandler(new Error('A pair must be "string" or "array".'));
 }
 exports.getExchangeDataArray = getExchangeDataArray;
 function getPairArray(currency, base) {

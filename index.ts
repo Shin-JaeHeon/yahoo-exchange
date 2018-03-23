@@ -27,7 +27,6 @@ export function getData(pair: string, callback: (data: any, pair?: string) => an
     }, (err, response, html) => {
         if (err) errorHandler(err, pair);
         else callback(parseHTML(html), pair);
-
     });
 }
 
@@ -47,6 +46,7 @@ export function getDataArray(pair: Array<string>, callback: (data: any, pair?: s
 export function getExchangeDataArray(pair: any, callback: (data: Array<number>, pair?: string) => any, errorHandler: (error: Error, pair?: String) => any = err => console.log(err)): void {
     if (typeof pair === 'string') req(pair, errorHandler, callback);
     else if (Array.isArray(pair)) pair.forEach(v => req(v, errorHandler, callback));
+    else errorHandler(new Error('A pair must be "string" or "array".'));
 }
 
 export function getPairArray(currency: Array<string>, base: Array<string>): Array<string> {

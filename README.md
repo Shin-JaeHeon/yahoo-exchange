@@ -1,12 +1,19 @@
 # yahoo-exchange
-npm : https://www.npmjs.com/package/yahoo-exchange
+
+[![npm](https://img.shields.io/npm/v/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
+[![npm](https://img.shields.io/npm/dt/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
+[![npm](https://img.shields.io/npm/dw/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
+[![npm](https://img.shields.io/npm/dm/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
+[![npm](https://img.shields.io/npm/dy/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
+[![npm](https://img.shields.io/npm/l/yahoo-exchange.svg?registry_uri=https%3A%2F%2Fregistry.npmjs.com&style=flat-square)](https://opensource.org/licenses/MIT)
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string or Array\<string\>
 * callback : (Array\<number\>, pair) => any
-### Warning!
-Bid and Ask can be returned NaN by some pair. If you find a pair that has errors, please write the pair at the issue. 
+* errorHandler : options (A default method is ```console.log(error)```)
+> ### Warning!
+>Bid and Ask can be returned NaN by some pair. If you find a pair that has errors, please write the pair at the issue. 
 #### A known error
-JPYKRW : NaN
+* JPYKRW 
 
 Array\<number\> : [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max, 52 Week Range Min, 52 Week Range Max]
 ### Example
@@ -48,7 +55,7 @@ Array\<number\> : [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask
 ### Warning
 getExchangeDataArray does not return Arrays to Callback.
 ## getData(pair, callback, errorHandler): void @deprecated
-> ### deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
+> deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
 ### Example
 * ``` javascript
   getData('USDKRW', data => console.log(data)); // [
@@ -66,7 +73,7 @@ getExchangeDataArray does not return Arrays to Callback.
    // 1070 USDKRW or [Error:USDKRW] error message
   ```
 ## getDataArray(pair, callback, errorHandler): void @deprecated
-> ### deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
+> deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
 ### Example
 * ``` javascript
   getDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
