@@ -102,7 +102,37 @@ getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
  * USD/RUB
 ### getExchangeDataLowTrafficP는 무엇인가요?
 ```Promise```로 반환합니다.
+## getFxYahooJapan(callback, errorHandler): void 
 
+* callback : (data:Object)=> any
+> data = { 'USDJPY':\[100.05,100.15\], ... more 21 data }
+
+* errorHandler : 옵션입니다. 기본 메소드는 ```console.log(error)``` 입니다. 
+이 메소드는 야후 재팬 5분차트(5分足) FX 데이터(bid와 ask)를 반환합니다.
+### 반환하는 페어 목록
+* USDJPY
+* EURJPY
+* AUDJPY
+* GBPJPY
+* NZDJPY
+* CADJPY
+* CHFJPY
+* ZARJPY
+* CNHJPY
+* EURUSD
+* GBPUSD
+* AUDUSD
+* NZDUSD
+* HKDJPY
+* EURGBP
+* EURAUD
+* USDCHF
+* EURCHF
+* GBPCHF
+* AUDCHF
+* CADCHF
+* USDHKD
+ 
 ## getData(pair, callback, errorHandler): void @deprecated
 > 1.0에서 제거된 메소드입니다. 2.0에서 삭제될 예정이오니, getExchangeDataArray를 사용하세요.
 ### 예시 코드

@@ -1,7 +1,9 @@
 import request = require("request");
 
-const arrayLen24 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const remove = (str: string, remove: string) => str.replace(remove, '');
+const arrayLen24 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const remove = (str: string, remove: string) => {
+    if (typeof str === 'string') return str.replace(remove, '');
+};
 const parseReact = (str: string, number, num: number) => str.split(`react-text: ${number} -->`)[num];
 const parseR = (str: string) => number => parseFloat(remove(parseReact(str, number, 1).split('<')[0], ','));
 const parseHTML = html => parseR(html.toString())(36);
@@ -24,7 +26,6 @@ const req = (pair, errorHandler, callback) => request({
     if (err) errorHandler(err, pair);
     else callback(parseHTML2(html.toString().replace(',', ''), parseR(html.toString())), pair);
 });
-
 export function getExchangeDataLowTrafficP(): Promise<Array<Array<any>>> {
     return new Promise<Array<Array<any>>>(((resolve, reject) => request({
         url: 'https://finance.yahoo.com/currencies',
@@ -40,7 +41,6 @@ export function getExchangeDataLowTrafficP(): Promise<Array<Array<any>>> {
         }
     })));
 }
-
 export function getExchangeDataLowTraffic(callback: (data: Array<Array<any>>) => any, errorHandler: (error: Error, pair?: String) => any = err => console.log(err)): void {
     request({
         url: 'https://finance.yahoo.com/currencies',

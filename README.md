@@ -101,7 +101,37 @@ If you use the following pair, it is recommended that you use this method.
  * USD/RUB
 ### What is getExchangeDataLowTrafficP?
 It returns data using Promise.
+## getFxYahooJapan(callback, errorHandler): void 
 
+* callback : (data:Object)=> any
+> data = { 'USDJPY':\[100.05,100.15\], ... more 21 data }
+
+* errorHandler : options (A default method is ```err => console.log(err)```)
+It does return fx data (bid and ask) in 5m chart (5分足)
+### What pairs are available?
+* USDJPY
+* EURJPY
+* AUDJPY
+* GBPJPY
+* NZDJPY
+* CADJPY
+* CHFJPY
+* ZARJPY
+* CNHJPY
+* EURUSD
+* GBPUSD
+* AUDUSD
+* NZDUSD
+* HKDJPY
+* EURGBP
+* EURAUD
+* USDCHF
+* EURCHF
+* GBPCHF
+* AUDCHF
+* CADCHF
+* USDHKD
+ 
 ## getData(pair, callback, errorHandler): void @deprecated
 > deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
 ### Example
