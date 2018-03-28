@@ -1,7 +1,6 @@
 import request = require("request");
 
 const arrayLen24 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const arrayLen21 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const remove = (str: string, remove: string) => str.replace(remove, '');
 const parseReact = (str: string, number, num: number) => str.split(`react-text: ${number} -->`)[num];
 const parseR = (str: string) => number => parseFloat(remove(parseReact(str, number, 1).split('<')[0], ','));
