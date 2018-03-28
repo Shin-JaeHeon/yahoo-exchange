@@ -108,6 +108,7 @@ getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
 > data = { 'USDJPY':\[100.05,100.15\], ... more 21 data }
 
 * errorHandler : 옵션입니다. 기본 메소드는 ```console.log(error)``` 입니다. 
+
 이 메소드는 야후 재팬 5분차트(5分足) FX 데이터(bid와 ask)를 반환합니다.
 ### 반환하는 페어 목록
 * USDJPY

@@ -108,8 +108,10 @@ getExchangeDataArrayは全体データをコールバック関数で返却しま
 > data = { 'USDJPY':\[100.05,100.15\], ... more 21 data }
 
 * errorHandler :  オプションです。 基本メソッドは ```console.log(error)``` です。 
-このメソッドは、ヤフージャパンのFXデータ(bidとask)を返還します。 (5分足のデータです。）
-###　返還したペアの一覧
+
+これは、ヤフージャパンのFXデータ(bidとask)を返還します。 (5分足のデータです。）
+
+### 返還したペアの一覧
 * USDJPY
 * EURJPY
 * AUDJPY
@@ -175,7 +177,7 @@ getExchangeDataArrayは全体データをコールバック関数で返却しま
    // 970 JPYKRW または [Error:JPYKRW] error message
   ```
 ### 警告
-getDataArrayyは全体データをコールバック関数で返却しません。
+getDataArrayは全体データをコールバック関数で返却しません。
 ##  getPairArray(currency: Array<string>, base: Array<string>): Array<string> 
 フェアリストを生成してくれます。
 ### 例示コード
