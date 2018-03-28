@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const request = require("request");
-const arrayLen24 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const arrayLen24 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const arrayLen21 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const remove = (str, remove) => str.replace(remove, '');
 const parseReact = (str, number, num) => str.split(`react-text: ${number} -->`)[num];
 const parseR = (str) => number => parseFloat(remove(parseReact(str, number, 1).split('<')[0], ','));
@@ -61,6 +62,50 @@ function getExchangeDataLowTraffic(callback, errorHandler = err => console.log(e
     });
 }
 exports.getExchangeDataLowTraffic = getExchangeDataLowTraffic;
+function getFxYahooJapan(callback, errorHandler = err => console.log(err)) {
+    request({
+        url: 'https://info.finance.yahoo.co.jp/fx/list/',
+        encoding: null
+    }, (err, response, html) => {
+        let h = html.toString();
+        if (err)
+            errorHandler(err);
+        else {
+            const data = h.match(/......_chart_...">[0-9.]*/gmi);
+            let dv = {
+                USDJPY: {},
+                EURJPY: {},
+                AUDJPY: {},
+                GBPJPY: {},
+                NZDJPY: {},
+                CADJPY: {},
+                CHFJPY: {},
+                ZARJPY: {},
+                CNHJPY: {},
+                EURUSD: {},
+                GBPUSD: {},
+                AUDUSD: {},
+                NZDUSD: {},
+                HKDJPY: {},
+                EURGBP: {},
+                EURAUD: {},
+                USDCHF: {},
+                EURCHF: {},
+                GBPCHF: {},
+                AUDCHF: {},
+                CADCHF: {},
+                USDHKD: {}
+            };
+            Object.keys(dv).map(v => dv[v] = data.reduce((prev, current) => {
+                if (current.replace(/_.*/, '') === v)
+                    prev.push(parseFloat(current.replace(/......_chart_....>/, '')));
+                return prev;
+            }, []));
+            callback(dv);
+        }
+    });
+}
+exports.getFxYahooJapan = getFxYahooJapan;
 /**
  * @deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
  */

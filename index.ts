@@ -1,6 +1,7 @@
 import request = require("request");
 
-const arrayLen24 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const arrayLen24 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const arrayLen21 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const remove = (str: string, remove: string) => str.replace(remove, '');
 const parseReact = (str: string, number, num: number) => str.split(`react-text: ${number} -->`)[num];
 const parseR = (str: string) => number => parseFloat(remove(parseReact(str, number, 1).split('<')[0], ','));
@@ -53,6 +54,49 @@ export function getExchangeDataLowTraffic(callback: (data: Array<Array<any>>) =>
             const price = h.match(/">([0-9,.])+/gmi);
             const changes = h.match(/ -->[^0-9reactspa/><\-]*[0-9.\-]+/gmi);
             callback(arrayLen24.map((v, a) => [remove(pair[a], '>'), parseFloat(remove(price[a], '\">')), parseFloat(remove(changes[a * 2], " -->")), parseFloat(remove(changes[a * 2 + 1], ' -->'))]));
+        }
+    });
+}
+
+export function getFxYahooJapan(callback: (data: Object) => any, errorHandler: (error: Error, pair?: String) => any = err => console.log(err)): void {
+    request({
+        url: 'https://info.finance.yahoo.co.jp/fx/list/',
+        encoding: null
+    }, (err, response, html) => {
+        let h = html.toString();
+        if (err) errorHandler(err);
+        else {
+            const data = h.match(/......_chart_...">[0-9.]*/gmi);
+            let dv = {
+                USDJPY: {},
+                EURJPY: {},
+                AUDJPY: {},
+                GBPJPY: {},
+                NZDJPY: {},
+                CADJPY: {},
+                CHFJPY: {},
+                ZARJPY: {},
+                CNHJPY: {},
+                EURUSD: {},
+                GBPUSD: {},
+                AUDUSD: {},
+                NZDUSD: {},
+                HKDJPY: {},
+                EURGBP: {},
+                EURAUD: {},
+                USDCHF: {},
+                EURCHF: {},
+                GBPCHF: {},
+                AUDCHF: {},
+                CADCHF: {},
+                USDHKD: {}
+            };
+            Object.keys(dv).map(v =>
+                dv[v] = data.reduce((prev, current) => {
+                    if (current.replace(/_.*/, '') === v) prev.push(parseFloat(current.replace(/......_chart_....>/, '')));
+                    return prev;
+                }, []));
+            callback(dv);
         }
     });
 }
