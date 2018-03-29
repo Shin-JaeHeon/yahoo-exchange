@@ -26,31 +26,33 @@ const req = (pair, errorHandler, callback) => request({
     if (err) errorHandler(err, pair);
     else callback(parseHTML2(html.toString().replace(',', ''), parseR(html.toString())), pair);
 });
+
 export function getExchangeDataLowTrafficP(): Promise<Array<Array<any>>> {
     return new Promise<Array<Array<any>>>(((resolve, reject) => request({
         url: 'https://finance.yahoo.com/currencies',
         encoding: null
     }, (err, response, html) => {
-        let h = html.toString().split(`data-reactid=\"43\">`)[2];
+        let h = html.toString().split(`data-reactid=\"75\"`)[2];
         if (err) reject(err);
         else {
             const pair = h.match(/>(...\/...)/gmi);
-            const price = h.match(/">([0-9,.])+/gmi);
+            const price = h.match(/">([0-9,.]+)/gmi);
             const changes = h.match(/ -->[^0-9reactspa/><\-]*[0-9.\-]+/gmi);
             resolve(arrayLen24.map((v, a) => [remove(pair[a], '>'), parseFloat(remove(price[a], '\">')), parseFloat(remove(changes[a * 2], " -->")), parseFloat(remove(changes[a * 2 + 1], ' -->'))]));
         }
     })));
 }
+
 export function getExchangeDataLowTraffic(callback: (data: Array<Array<any>>) => any, errorHandler: (error: Error, pair?: String) => any = err => console.log(err)): void {
     request({
         url: 'https://finance.yahoo.com/currencies',
         encoding: null
     }, (err, response, html) => {
-        let h = html.toString().split(`data-reactid=\"43\">`)[2];
+        let h = html.toString().split(`data-reactid=\"75\"`)[2];
         if (err) errorHandler(err);
         else {
             const pair = h.match(/>(...\/...)/gmi);
-            const price = h.match(/">([0-9,.])+/gmi);
+            const price = h.match(/">([0-9,.]+)/gmi);
             const changes = h.match(/ -->[^0-9reactspa/><\-]*[0-9.\-]+/gmi);
             callback(arrayLen24.map((v, a) => [remove(pair[a], '>'), parseFloat(remove(price[a], '\">')), parseFloat(remove(changes[a * 2], " -->")), parseFloat(remove(changes[a * 2 + 1], ' -->'))]));
         }

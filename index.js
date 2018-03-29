@@ -35,12 +35,12 @@ function getExchangeDataLowTrafficP() {
         url: 'https://finance.yahoo.com/currencies',
         encoding: null
     }, (err, response, html) => {
-        let h = html.toString().split(`data-reactid=\"43\">`)[2];
+        let h = html.toString().split(`data-reactid=\"75\"`)[2];
         if (err)
             reject(err);
         else {
             const pair = h.match(/>(...\/...)/gmi);
-            const price = h.match(/">([0-9,.])+/gmi);
+            const price = h.match(/">([0-9,.]+)/gmi);
             const changes = h.match(/ -->[^0-9reactspa/><\-]*[0-9.\-]+/gmi);
             resolve(arrayLen24.map((v, a) => [remove(pair[a], '>'), parseFloat(remove(price[a], '\">')), parseFloat(remove(changes[a * 2], " -->")), parseFloat(remove(changes[a * 2 + 1], ' -->'))]));
         }
@@ -52,12 +52,12 @@ function getExchangeDataLowTraffic(callback, errorHandler = err => console.log(e
         url: 'https://finance.yahoo.com/currencies',
         encoding: null
     }, (err, response, html) => {
-        let h = html.toString().split(`data-reactid=\"43\">`)[2];
+        let h = html.toString().split(`data-reactid=\"75\"`)[2];
         if (err)
             errorHandler(err);
         else {
             const pair = h.match(/>(...\/...)/gmi);
-            const price = h.match(/">([0-9,.])+/gmi);
+            const price = h.match(/">([0-9,.]+)/gmi);
             const changes = h.match(/ -->[^0-9reactspa/><\-]*[0-9.\-]+/gmi);
             callback(arrayLen24.map((v, a) => [remove(pair[a], '>'), parseFloat(remove(price[a], '\">')), parseFloat(remove(changes[a * 2], " -->")), parseFloat(remove(changes[a * 2 + 1], ' -->'))]));
         }
