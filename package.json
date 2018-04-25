@@ -11,10 +11,10 @@
     "email": "heoni0504@gmail.com"
   },
   "main": "index.js",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "license": "MIT",
   "dependencies": {
-    "request": "^2.83.0"
+    "request": "^2.85.0"
   },
   "repository": {
     "type": "git",

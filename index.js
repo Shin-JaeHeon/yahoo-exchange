@@ -25,10 +25,15 @@ const req = (pair, errorHandler, callback) => request({
     url: `https://finance.yahoo.com/quote/${pair}=X?p=${pair}=X`,
     encoding: null,
 }, (err, response, html) => {
-    if (err)
-        errorHandler(err, pair);
-    else
-        callback(parseHTML2(html.toString().replace(',', ''), parseR(html.toString())), pair);
+    try {
+        if (err)
+            errorHandler(err, pair);
+        else
+            callback(parseHTML2(html.toString().replace(',', ''), parseR(html.toString())), pair);
+    }
+    catch (e) {
+        errorHandler(e, 'yahoo-exchange: Unknown Error');
+    }
 });
 function getExchangeDataLowTrafficP() {
     return new Promise(((resolve, reject) => request({
@@ -48,64 +53,74 @@ function getExchangeDataLowTrafficP() {
 }
 exports.getExchangeDataLowTrafficP = getExchangeDataLowTrafficP;
 function getExchangeDataLowTraffic(callback, errorHandler = err => console.log(err)) {
-    request({
-        url: 'https://finance.yahoo.com/currencies',
-        encoding: null
-    }, (err, response, html) => {
-        let h = html.toString().split(`data-reactid=\"75\"`)[2];
-        if (err)
-            errorHandler(err);
-        else {
-            const pair = h.match(/>(...\/...)/gmi);
-            const price = h.match(/">([0-9,.]+)/gmi);
-            const changes = h.match(/ -->[^0-9reactspa/><\-]*[0-9.\-]+/gmi);
-            callback(arrayLen24.map((v, a) => [remove(pair[a], '>'), parseFloat(remove(price[a], '\">')), parseFloat(remove(changes[a * 2], " -->")), parseFloat(remove(changes[a * 2 + 1], ' -->'))]));
-        }
-    });
+    try {
+        request({
+            url: 'https://finance.yahoo.com/currencies',
+            encoding: null
+        }, (err, response, html) => {
+            let h = html.toString().split(`data-reactid=\"75\"`)[2];
+            if (err)
+                errorHandler(err);
+            else {
+                const pair = h.match(/>(...\/...)/gmi);
+                const price = h.match(/">([0-9,.]+)/gmi);
+                const changes = h.match(/ -->[^0-9reactspa/><\-]*[0-9.\-]+/gmi);
+                callback(arrayLen24.map((v, a) => [remove(pair[a], '>'), parseFloat(remove(price[a], '\">')), parseFloat(remove(changes[a * 2], " -->")), parseFloat(remove(changes[a * 2 + 1], ' -->'))]));
+            }
+        });
+    }
+    catch (e) {
+        errorHandler(e, 'yahoo-exchange: Unknown Error');
+    }
 }
 exports.getExchangeDataLowTraffic = getExchangeDataLowTraffic;
 function getFxYahooJapan(callback, errorHandler = err => console.log(err)) {
-    request({
-        url: 'https://info.finance.yahoo.co.jp/fx/list/',
-        encoding: null
-    }, (err, response, html) => {
-        let h = html.toString();
-        if (err)
-            errorHandler(err);
-        else {
-            const data = h.match(/......_chart_...">[0-9.]*/gmi);
-            let dv = {
-                USDJPY: {},
-                EURJPY: {},
-                AUDJPY: {},
-                GBPJPY: {},
-                NZDJPY: {},
-                CADJPY: {},
-                CHFJPY: {},
-                ZARJPY: {},
-                CNHJPY: {},
-                EURUSD: {},
-                GBPUSD: {},
-                AUDUSD: {},
-                NZDUSD: {},
-                HKDJPY: {},
-                EURGBP: {},
-                EURAUD: {},
-                USDCHF: {},
-                EURCHF: {},
-                GBPCHF: {},
-                AUDCHF: {},
-                CADCHF: {},
-                USDHKD: {}
-            };
-            Object.keys(dv).map(v => dv[v] = data.reduce((prev, current) => {
-                if (current.replace(/_.*/, '') === v)
-                    prev.push(parseFloat(current.replace(/......_chart_....>/, '')));
-                return prev;
-            }, []));
-            callback(dv);
-        }
-    });
+    try {
+        request({
+            url: 'https://info.finance.yahoo.co.jp/fx/list/',
+            encoding: null
+        }, (err, response, html) => {
+            let h = html.toString();
+            if (err)
+                errorHandler(err);
+            else {
+                const data = h.match(/......_chart_...">[0-9.]*/gmi);
+                let dv = {
+                    USDJPY: {},
+                    EURJPY: {},
+                    AUDJPY: {},
+                    GBPJPY: {},
+                    NZDJPY: {},
+                    CADJPY: {},
+                    CHFJPY: {},
+                    ZARJPY: {},
+                    CNHJPY: {},
+                    EURUSD: {},
+                    GBPUSD: {},
+                    AUDUSD: {},
+                    NZDUSD: {},
+                    HKDJPY: {},
+                    EURGBP: {},
+                    EURAUD: {},
+                    USDCHF: {},
+                    EURCHF: {},
+                    GBPCHF: {},
+                    AUDCHF: {},
+                    CADCHF: {},
+                    USDHKD: {}
+                };
+                Object.keys(dv).map(v => dv[v] = data.reduce((prev, current) => {
+                    if (current.replace(/_.*/, '') === v)
+                        prev.push(parseFloat(current.replace(/......_chart_....>/, '')));
+                    return prev;
+                }, []));
+                callback(dv);
+            }
+        });
+    }
+    catch (e) {
+        errorHandler(e, 'yahoo-exchange: Unknown Error');
+    }
 }
 exports.getFxYahooJapan = getFxYahooJapan;
 /**
@@ -139,12 +154,17 @@ function getDataArray(pair, callback, errorHandler = err => console.log(err)) {
 }
 exports.getDataArray = getDataArray;
 function getExchangeDataArray(pair, callback, errorHandler = err => console.log(err)) {
-    if (typeof pair === 'string')
-        req(pair, errorHandler, callback);
-    else if (Array.isArray(pair))
-        pair.forEach(v => req(v, errorHandler, callback));
-    else
-        errorHandler(new Error('A pair must be "string" or "array".'));
+    try {
+        if (typeof pair === 'string')
+            req(pair, errorHandler, callback);
+        else if (Array.isArray(pair))
+            pair.forEach(v => req(v, errorHandler, callback));
+        else
+            errorHandler(new Error('A pair must be "string" or "array".'));
+    }
+    catch (e) {
+        errorHandler(e, 'yahoo-exchange: Unknown Error');
+    }
 }
 exports.getExchangeDataArray = getExchangeDataArray;
 function getPairArray(currency, base) {
