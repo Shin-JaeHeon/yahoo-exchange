@@ -137,47 +137,9 @@ getExchangeDataArrayは全体データをコールバック関数で返却しま
  
 ## getData(pair, callback, errorHandler): void @deprecated
 > 1.0で除去されたメソッドです。 2.0で削除される予定ですので、getExchangeDataArrayを使用してください。
-### 例示コード
-* ``` javascript
-  getData('USDKRW', data => console.log(data)); // [
-  ```
-* ``` javascript
-  getData('USDKRW', data => console.log(data), error => console.log('[Error]' + error));
-  // 1070 または [Error] error message
-  ```
-* ``` javascript
-  getData('USDKRW', (data,pair) => console.log(data,pair), error => console.log('[Error]' + error));
-  // 1070 USDRKW または [Error] error message
-  ```
-* ``` javascript
-  getData('USDKRW', (data,pair) => console.log(data,pair), (error,pair) => console.log(`[Error:${pair}]${error}`));
-   // 1070 USDKRW または [Error:USDKRW] error message
-  ```
+
 ## getDataArray(pair, callback, errorHandler): void @deprecated
 > 1.0で除去されたメソッドです。 2.0で削除される予定ですので、getExchangeDataArrayを使用してください。
-### 例示コード
-* ``` javascript
-  getDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
-  // 1070
-  // 970
-  ```
-* ``` javascript
-  getDataArray(['USDKRW', 'JPYKRW'], data => console.log(data), error => console.log('[Error]' + error));
-  // 1070 または [Error] error message
-  // 970 または [Error] error message
-  ```
-* ``` javascript
-   getDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), error => console.log('[Error]' + error));
-   // 1070 USDKRW または [Error] error message
-   // 970 JPYKRW または [Error] error message
-  ```
-* ``` javascript
-   getDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), (error,pair) => console.log(`[Error:${pair}]${error}`));
-   // 1070 USDKRW または [Error:USDKRW] error message
-   // 970 JPYKRW または [Error:JPYKRW] error message
-  ```
-### 警告
-getDataArrayは全体データをコールバック関数で返却しません。
 ##  getPairArray(currency: Array<string>, base: Array<string>): Array<string> 
 フェアリストを生成してくれます。
 ### 例示コード
@@ -190,14 +152,6 @@ getDataArrayは全体データをコールバック関数で返却しません�
 ## test.js
 * ``` javascript
   const yahooExchange = require('yahoo-exchange');
-  /**
-   * yahooExchange.getData('USDKRW', data => console.log(data));
-   * yahooExchange.getDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
-   * yahooExchange.getData('USDKRW', (data, pair) => console.log(data, pair));
-   * yahooExchange.getDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair));
-   * yahooExchange.getData('USDKRW', (data, pair) => console.log(data, pair), (error,pair) => console.log(`[Error] ${pair}\n${error}`));
-   * yahooExchange.getDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair), (error,pair) => console.log(`[Error] ${pair}\n${error}`));
-   */
   yahooExchange.getExchangeDataArray('USDKRW', data => console.log(data));
   yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
   yahooExchange.getExchangeDataArray('USDKRW', (data, pair) => console.log(data, pair));

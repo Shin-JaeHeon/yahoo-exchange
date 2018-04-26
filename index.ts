@@ -7,7 +7,7 @@ const remove = (str: string, remove: string) => {
 const parseReact = (str: string, number, num: number) => str.split(`react-text: ${number} -->`)[num];
 const parseR = (str: string) => number => parseFloat(remove(parseReact(str, number, 1).split('<')[0], ','));
 const parseHTML = html => parseR(html.toString())(36);
-const parseHTML2 = (html: string, r: Function) => [r(36),
+const parseHTML2 = (html: string, r: Function) => [parseFloat(remove(/<!-- react-text: 36 -->([0-9.,]+)/gmi.exec(html)[1], ',')),
     html.indexOf('react-text: 39 -->') === -1 ?
         parseFloat(parseReact(html, 38, 2).split(' ')[0]) :
         parseFloat(parseReact(html, 39, 1).split(' ')[0]),
