@@ -1,19 +1,24 @@
 import request = require('request');
 
 const arrayLen24 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const regexpList = [
+    /<!-- react-text: 36 -->([0-9.,]+)/gmi,
+    /<!-- react-text: 38 -->([0-9.,]+)/gmi,
+    /<!-- react-text: 39 -->([0-9.,]+)/gmi
+];
 const remove = (str: string, remove: string) => {
     if (typeof str === 'string') return str.replace(remove, '');
 };
 const parseReact = (str: string, number, num: number) => str.split(`react-text: ${number} -->`)[num];
 const parseR = (str: string) => number => parseFloat(remove(parseReact(str, number, 1).split('<')[0], ','));
 const parseHTML = html => parseR(html.toString())(36);
-const parseHTML2 = (html: string, r: Function) => [parseFloat(remove(/<!-- react-text: 36 -->([0-9.,]+)/gmi.exec(html)[1], ',')),
+const parseHTML2 = (html: string, r: Function) => [parseFloat(remove(regexpList[0].exec(html)[1], ',')),
     html.indexOf('react-text: 39 -->') === -1 ?
         parseFloat(parseReact(html, 38, 2).split(' ')[0]) :
-        parseFloat(parseReact(html, 39, 1).split(' ')[0]),
+        parseFloat(regexpList[2].exec(html)[1].split(' ')[0]),
     html.indexOf('react-text: 39 -->') === -1 ?
         parseFloat(parseReact(html, 38, 2).split('(')[1].split("\%")[0]) :
-        parseFloat(parseReact(html, 39, 1).split('(')[1].split("\%")[0]), r(42), r(48), r(54), r(71),
+        parseFloat(regexpList[2].exec(html)[1].split('(')[1].split("\%")[0]), r(42), r(48), r(54), r(71),
     parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[0], ',')),
     parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[2].split('<')[0], ',')),
     parseFloat(remove(html.split('data-reactid="65">')[3].split(' ')[0], ',')),
