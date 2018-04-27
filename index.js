@@ -2,11 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const request = require("request");
 const arrayLen24 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const regexpList = [
-    /<!-- react-text: 36 -->([0-9.,]+)/gmi,
-    /<!-- react-text: 38 -->([0-9.,]+)/gmi,
-    /<!-- react-text: 39 -->([0-9.,]+)/gmi
-];
 const remove = (str, remove) => {
     if (typeof str === 'string')
         return str.replace(remove, '');
@@ -14,18 +9,25 @@ const remove = (str, remove) => {
 const parseReact = (str, number, num) => str.split(`react-text: ${number} -->`)[num];
 const parseR = (str) => number => parseFloat(remove(parseReact(str, number, 1).split('<')[0], ','));
 const parseHTML = html => parseR(html.toString())(36);
-const parseHTML2 = (html, r) => [parseFloat(remove(regexpList[0].exec(html)[1], ',')),
-    html.indexOf('react-text: 39 -->') === -1 ?
-        parseFloat(parseReact(html, 38, 2).split(' ')[0]) :
-        parseFloat(regexpList[2].exec(html)[1].split(' ')[0]),
-    html.indexOf('react-text: 39 -->') === -1 ?
-        parseFloat(parseReact(html, 38, 2).split('(')[1].split("\%")[0]) :
-        parseFloat(regexpList[2].exec(html)[1].split('(')[1].split("\%")[0]), r(42), r(48), r(54), r(71),
-    parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[0], ',')),
-    parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[2].split('<')[0], ',')),
-    parseFloat(remove(html.split('data-reactid="65">')[3].split(' ')[0], ',')),
-    parseFloat(remove(html.split('data-reactid="65">')[3].split(' ')[2].split('<')[0], ','))
-];
+const parseHTML2 = (html, r) => {
+    const list = [];
+    list.push(parseFloat(remove(/<!-- react-text: 36 -->([0-9.,]+)/gmi.exec(html)[1], ',')));
+    list.push(html.indexOf('react-text: 39 -->') === -1 ?
+        parseFloat(parseReact(html, 38, 3).split(' ')[0]) :
+        parseFloat(parseReact(html, 39, 1).split(' ')[0]));
+    list.push(html.indexOf('react-text: 39 -->') === -1 ?
+        parseFloat(parseReact(html, 38, 3).split('(')[1].split("\%")[0]) :
+        parseFloat(parseReact(html, 39, 1).split('(')[1].split("\%")[0]));
+    list.push(r(42));
+    list.push(r(48));
+    list.push(r(54));
+    list.push(r(71));
+    list.push(parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[0], ',')));
+    list.push(parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[2].split('<')[0], ',')));
+    list.push(parseFloat(remove(html.split('data-reactid="65">')[3].split(' ')[0], ',')));
+    list.push(parseFloat(remove(html.split('data-reactid="65">')[3].split(' ')[2].split('<')[0], ',')));
+    return list;
+};
 const req = (pair, errorHandler, callback) => request({
     url: `https://finance.yahoo.com/quote/${pair}=X?p=${pair}=X`,
     encoding: null,
@@ -38,6 +40,7 @@ const req = (pair, errorHandler, callback) => request({
     }
     catch (e) {
         errorHandler(e, 'yahoo-exchange: Unknown Error');
+        console.log(e);
     }
 });
 function getExchangeDataLowTrafficP() {
