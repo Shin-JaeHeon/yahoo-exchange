@@ -20,7 +20,6 @@ const parseHTML2 = (html: string, r: Function) => {
     list.push(r(48));
     list.push(r(54));
     list.push(r(71));
-    require('fs').writeFileSync(new Date().getTime().toString(), html.toString());
     list.push(parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[0], ',')));
     list.push(parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[2].split('<')[0], ',')));
     list.push(parseFloat(remove(html.split('data-reactid="65">')[3].split(' ')[0], ',')));
