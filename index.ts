@@ -16,10 +16,11 @@ const parseHTML2 = (html: string, r: Function) => {
     list.push(html.indexOf('react-text: 39 -->') === -1 ?
         parseFloat(parseReact(html, 38, 3).split('(')[1].split("\%")[0]) :
         parseFloat(parseReact(html, 39, 1).split('(')[1].split("\%")[0]));
-    list.push(r(42));
+    list.push(parseFloat(parseReact(html, 42, 2).split('<')[0]));
     list.push(r(48));
     list.push(r(54));
     list.push(r(71));
+    require('fs').writeFileSync(new Date().getTime().toString(), html.toString());
     list.push(parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[0], ',')));
     list.push(parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[2].split('<')[0], ',')));
     list.push(parseFloat(remove(html.split('data-reactid="65">')[3].split(' ')[0], ',')));
