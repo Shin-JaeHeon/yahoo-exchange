@@ -13,10 +13,10 @@ const parseHTML2 = (html, r) => {
     const list = [];
     list.push(parseFloat(remove(/<!-- react-text: 36 -->([0-9.,]+)/gmi.exec(html)[1], ',')));
     list.push(html.indexOf('react-text: 39 -->') === -1 ?
-        parseFloat(parseReact(html, 38, 3).split(' ')[0]) :
+        parseFloat(parseReact(html, 38, 2).split(' ')[0]) :
         parseFloat(parseReact(html, 39, 1).split(' ')[0]));
     list.push(html.indexOf('react-text: 39 -->') === -1 ?
-        parseFloat(parseReact(html, 38, 3).split('(')[1].split("\%")[0]) :
+        parseFloat(parseReact(html, 38, 2).split('(')[1].split("\%")[0]) :
         parseFloat(parseReact(html, 39, 1).split('(')[1].split("\%")[0]));
     list.push(parseFloat(parseReact(html, 42, 2).split('<')[0]));
     list.push(r(48));
