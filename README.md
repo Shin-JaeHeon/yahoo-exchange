@@ -167,6 +167,6 @@ It Returns a symbol of currency
   yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
 
   ```
-##A copyright notice on the library used
+## A copyright notice on the library used
 Some of the code from the library below has been included in this project.
 * [currency-symbol-map](https://github.com/bengourley/currency-symbol-map)
