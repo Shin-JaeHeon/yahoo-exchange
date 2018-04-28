@@ -133,14 +133,8 @@ getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
 * AUDCHF
 * CADCHF
 * USDHKD
- 
-## getData(pair, callback, errorHandler): void @deprecated
-> 1.0에서 제거된 메소드입니다. 2.0에서 삭제될 예정이오니, getExchangeDataArray를 사용하세요.
 
-## getDataArray(pair, callback, errorHandler): void @deprecated
-> 1.0에서 제거된 메소드입니다. 2.0에서 삭제될 예정이오니, getExchangeDataArray를 사용하세요.
-
-##  getPairArray(currency: Array<string>, base: Array<string>): Array<string> 
+## getPairArray(currency: Array<string>, base: Array<string>): Array<string>
 페어 목록을 생성해 줍니다.
 ### 예시 코드
 * ``` javascript
@@ -149,6 +143,21 @@ getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
    getPairArray(currency,base);
    // ['USDKRW','JPYKRW'];
   ```
+
+## getUnit(currency:string):string
+通貨の記号($など)を返還してくれます。
+### Example
+ * ``` javascript
+     const currency = 'USD'
+     getUnit(currency);
+     // '$';
+
+## getData(pair, callback, errorHandler): void @deprecated
+> 1.0에서 제거된 메소드입니다. 2.0에서 삭제될 예정이오니, getExchangeDataArray를 사용하세요.
+
+## getDataArray(pair, callback, errorHandler): void @deprecated
+> 1.0에서 제거된 메소드입니다. 2.0에서 삭제될 예정이오니, getExchangeDataArray를 사용하세요.
+
 ## test.js
 * ``` javascript
   const yahooExchange = require('yahoo-exchange');
@@ -160,3 +169,7 @@ getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
   yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
 
   ```
+
+## 사용된 라이브러리에 대한 저작권 고지
+아래의 라이브러리의 일부코드가 이 프로젝트에 포함되었습니다.
+* (currency-symbol-map)[https://github.com/bengourley/currency-symbol-map]

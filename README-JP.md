@@ -134,21 +134,31 @@ getExchangeDataArrayは全体データをコールバック関数で返却しま
 * AUDCHF
 * CADCHF
 * USDHKD
- 
+
+## getPairArray(currency: Array<string>, base: Array<string>): Array<string>
+フェアリストを生成してくれます。
+### 例示コード
+* ``` javascript
+    const currency = ['USD','JPY'];
+    const base = ['KRW'];
+    getPairArray(currency,base);
+    // ['USDKRW','JPYKRW'];
+   ```
+## getUnit(currency:string):string
+It Returns a symbol of pair
+### Example
+* ``` javascript
+    const currency = 'USD'
+    getUnit(currency);
+    // '$';
+  ```
+
 ## getData(pair, callback, errorHandler): void @deprecated
 > 1.0で除去されたメソッドです。 2.0で削除される予定ですので、getExchangeDataArrayを使用してください。
 
 ## getDataArray(pair, callback, errorHandler): void @deprecated
 > 1.0で除去されたメソッドです。 2.0で削除される予定ですので、getExchangeDataArrayを使用してください。
-##  getPairArray(currency: Array<string>, base: Array<string>): Array<string> 
-フェアリストを生成してくれます。
-### 例示コード
-* ``` javascript
-   const currency = ['USD','JPY'];
-   const base = ['KRW'];
-   getPairArray(currency,base);
-   // ['USDKRW','JPYKRW'];
-  ```
+
 ## test.js
 * ``` javascript
   const yahooExchange = require('yahoo-exchange');
@@ -161,3 +171,6 @@ getExchangeDataArrayは全体データをコールバック関数で返却しま
 
   ```
 ### 翻訳の誤りはイッシューに登録してください。
+
+## 使用されたライブラリに対する著作権告知事項
+以下のライブラリの一部のコードがこのプロジェクトに含まれました。

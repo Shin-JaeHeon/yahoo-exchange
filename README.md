@@ -131,14 +131,8 @@ It does return fx data (bid and ask) in 5m chart (5分足)
 * AUDCHF
 * CADCHF
 * USDHKD
- 
-## getData(pair, callback, errorHandler): void @deprecated
-> deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
 
-## getDataArray(pair, callback, errorHandler): void @deprecated
-> deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
-
-##  getPairArray(currency: Array<string>, base: Array<string>): Array<string> 
+##  getPairArray(currency: Array<string>, base: Array<string>): Array<string>
 It Returns a pair array.
 ### Example
 * ``` javascript
@@ -147,6 +141,21 @@ It Returns a pair array.
    getPairArray(currency,base);
    // ['USDKRW','JPYKRW'];
   ```
+## getUnit(currency:string):string
+It Returns a symbol of pair
+### Example
+* ``` javascript
+    const currency = 'USD'
+    getUnit(currency);
+   // '$';
+  ```
+
+## getData(pair, callback, errorHandler): void @deprecated
+> deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
+
+## getDataArray(pair, callback, errorHandler): void @deprecated
+> deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
+
 ## test.js
 * ``` javascript
   const yahooExchange = require('yahoo-exchange');
@@ -158,3 +167,6 @@ It Returns a pair array.
   yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
 
   ```
+##A copyright notice on the library used
+Some of the code from the library below has been included in this project.
+* (currency-symbol-map)[https://github.com/bengourley/currency-symbol-map]
