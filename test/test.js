@@ -1,6 +1,5 @@
 const index = require('../index');
 
-
 index.getFxYahooJapan(v => console.log(v));
 index.getExchangeDataLowTraffic(v => console.log(v));
 index.getExchangeDataLowTrafficP().then(v => console.log(v));

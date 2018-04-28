@@ -34,8 +34,7 @@ const req = (pair, errorHandler, callback) => request({
         if (err) errorHandler(err, pair);
         else callback(parseHTML2(html.toString().replace(',', ''), parseR(html.toString())), pair);
     } catch (e) {
-        errorHandler(e, 'yahoo-exchange: Unknown Error');
-        console.log(e);
+        errorHandler(e, pair);
     }
 });
 
@@ -62,7 +61,7 @@ export function getExchangeDataLowTraffic(callback: (data: Array<Array<any>>) =>
             encoding: null
         }, (err, response, html) => {
             let h = html.toString().split(`data-reactid=\"75\"`)[2];
-            if (err) errorHandler(err);
+            if (err) errorHandler(err, 'getExchangeDataLowTraffic');
             else {
                 const pair = h.match(/>(...\/...)/gmi);
                 const price = h.match(/">([0-9,.]+)/gmi);
@@ -71,7 +70,7 @@ export function getExchangeDataLowTraffic(callback: (data: Array<Array<any>>) =>
             }
         });
     } catch (e) {
-        errorHandler(e, 'yahoo-exchange: Unknown Error');
+        errorHandler(e, 'getExchangeDataLowTraffic');
     }
 }
 
@@ -82,7 +81,7 @@ export function getFxYahooJapan(callback: (data: Object) => any, errorHandler: (
             encoding: null
         }, (err, response, html) => {
             let h = html.toString();
-            if (err) errorHandler(err);
+            if (err) errorHandler(err, 'getFxYahooJapan');
             else {
                 const data = h.match(/......_chart_...">[0-9.]*/gmi);
                 let dv = {
@@ -118,7 +117,7 @@ export function getFxYahooJapan(callback: (data: Object) => any, errorHandler: (
             }
         });
     } catch (e) {
-        errorHandler(e, 'yahoo-exchange: Unknown Error');
+        errorHandler(e, 'getFxYahooJapan');
     }
 }
 
@@ -155,9 +154,9 @@ export function getExchangeDataArray(pair: any, callback: (data: Array<number>, 
     try {
         if (typeof pair === 'string') req(pair, errorHandler, callback);
         else if (Array.isArray(pair)) pair.forEach(v => req(v, errorHandler, callback));
-        else errorHandler(new Error('A pair must be "string" or "array".'));
+        else errorHandler(new Error('A pair must be "string" or "array".'), 'getExchangeArray');
     } catch (e) {
-        errorHandler(e, 'yahoo-exchange: Unknown Error');
+        errorHandler(e, 'getExchangeDataArray');
     }
 }
 

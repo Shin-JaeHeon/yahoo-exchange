@@ -39,8 +39,7 @@ const req = (pair, errorHandler, callback) => request({
             callback(parseHTML2(html.toString().replace(',', ''), parseR(html.toString())), pair);
     }
     catch (e) {
-        errorHandler(e, 'yahoo-exchange: Unknown Error');
-        console.log(e);
+        errorHandler(e, pair);
     }
 });
 function getExchangeDataLowTrafficP() {
@@ -68,7 +67,7 @@ function getExchangeDataLowTraffic(callback, errorHandler = err => console.log(e
         }, (err, response, html) => {
             let h = html.toString().split(`data-reactid=\"75\"`)[2];
             if (err)
-                errorHandler(err);
+                errorHandler(err, 'getExchangeDataLowTraffic');
             else {
                 const pair = h.match(/>(...\/...)/gmi);
                 const price = h.match(/">([0-9,.]+)/gmi);
@@ -78,7 +77,7 @@ function getExchangeDataLowTraffic(callback, errorHandler = err => console.log(e
         });
     }
     catch (e) {
-        errorHandler(e, 'yahoo-exchange: Unknown Error');
+        errorHandler(e, 'getExchangeDataLowTraffic');
     }
 }
 exports.getExchangeDataLowTraffic = getExchangeDataLowTraffic;
@@ -90,7 +89,7 @@ function getFxYahooJapan(callback, errorHandler = err => console.log(err)) {
         }, (err, response, html) => {
             let h = html.toString();
             if (err)
-                errorHandler(err);
+                errorHandler(err, 'getFxYahooJapan');
             else {
                 const data = h.match(/......_chart_...">[0-9.]*/gmi);
                 let dv = {
@@ -127,7 +126,7 @@ function getFxYahooJapan(callback, errorHandler = err => console.log(err)) {
         });
     }
     catch (e) {
-        errorHandler(e, 'yahoo-exchange: Unknown Error');
+        errorHandler(e, 'getFxYahooJapan');
     }
 }
 exports.getFxYahooJapan = getFxYahooJapan;
@@ -168,10 +167,10 @@ function getExchangeDataArray(pair, callback, errorHandler = err => console.log(
         else if (Array.isArray(pair))
             pair.forEach(v => req(v, errorHandler, callback));
         else
-            errorHandler(new Error('A pair must be "string" or "array".'));
+            errorHandler(new Error('A pair must be "string" or "array".'), 'getExchangeArray');
     }
     catch (e) {
-        errorHandler(e, 'yahoo-exchange: Unknown Error');
+        errorHandler(e, 'getExchangeDataArray');
     }
 }
 exports.getExchangeDataArray = getExchangeDataArray;
