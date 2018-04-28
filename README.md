@@ -142,12 +142,12 @@ It Returns a pair array.
    // ['USDKRW','JPYKRW'];
   ```
 ## getUnit(currency:string):string
-It Returns a symbol of pair
+It Returns a symbol of currency
 ### Example
 * ``` javascript
-    const currency = 'USD'
+    const currency = 'USD';
     getUnit(currency);
-   // '$';
+    // '$';
   ```
 
 ## getData(pair, callback, errorHandler): void @deprecated
@@ -169,4 +169,4 @@ It Returns a symbol of pair
   ```
 ##A copyright notice on the library used
 Some of the code from the library below has been included in this project.
-* (currency-symbol-map)[https://github.com/bengourley/currency-symbol-map]
+* [currency-symbol-map](https://github.com/bengourley/currency-symbol-map)

@@ -145,10 +145,10 @@ getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
   ```
 
 ## getUnit(currency:string):string
-通貨の記号($など)を返還してくれます。
+통화의 기호($ 등)을 반환합니다.
 ### Example
  * ``` javascript
-     const currency = 'USD'
+     const currency = 'USD';
      getUnit(currency);
      // '$';
 
@@ -172,4 +172,4 @@ getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
 
 ## 사용된 라이브러리에 대한 저작권 고지
 아래의 라이브러리의 일부코드가 이 프로젝트에 포함되었습니다.
-* (currency-symbol-map)[https://github.com/bengourley/currency-symbol-map]
+* [currency-symbol-map](https://github.com/bengourley/currency-symbol-map)

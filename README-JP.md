@@ -145,10 +145,10 @@ getExchangeDataArrayは全体データをコールバック関数で返却しま
     // ['USDKRW','JPYKRW'];
    ```
 ## getUnit(currency:string):string
-It Returns a symbol of pair
+通貨の記号($など)を返還してくれます。
 ### Example
 * ``` javascript
-    const currency = 'USD'
+    const currency = 'USD';
     getUnit(currency);
     // '$';
   ```
@@ -174,3 +174,4 @@ It Returns a symbol of pair
 
 ## 使用されたライブラリに対する著作権告知事項
 以下のライブラリの一部のコードがこのプロジェクトに含まれました。
+* [currency-symbol-map](https://github.com/bengourley/currency-symbol-map)
