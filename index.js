@@ -542,4 +542,3 @@ function getUnit(currency) {
     }
 }
 exports.getUnit = getUnit;
-//# sourceMappingURL=index.js.map
