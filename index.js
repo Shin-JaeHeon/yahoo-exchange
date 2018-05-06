@@ -63,4 +63,3 @@ function getPairArray(currency, base) {
     return list;
 }
 exports.getPairArray = getPairArray;
-//# sourceMappingURL=index.js.map
