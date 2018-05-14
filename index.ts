@@ -7,22 +7,24 @@ const remove = (str: string, remove: string) => {
 const parseReact = (str: string, number, num: number) => str.split(`react-text: ${number} -->`)[num];
 const parseR = (str: string) => number => parseFloat(remove(parseReact(str, number, 1).split('<')[0], ','));
 const parseHTML = html => parseR(html.toString())(36);
+const getJSON = data => name => data[name];
 const parseHTML2 = (html: Object) => {
     const list = [];
     html = html['quoteSummary'].result[0];
-    const previousClose = html['summaryDetail']['previousClose'].raw;
-    const open = html['summaryDetail']['open'].raw;
+    const sd = getJSON(getJSON(html)('summaryDetail'));
+    const previousClose = sd('previousClose').raw;
+    const open = sd('open').raw;
     list.push((previousClose + open) / 2);
     list.push(html['price']['regularMarketChange'].raw);
     list.push(html['price']['regularMarketChangePercent'].raw * 100);
     list.push(previousClose);
     list.push(open);
-    list.push(html['summaryDetail']['bid'].raw);
-    list.push(html['summaryDetail']['ask'].raw);
-    list.push(html['summaryDetail']['dayLow'].raw);
-    list.push(html['summaryDetail']['dayHigh'].raw);
-    list.push(html['summaryDetail']['fiftyTwoWeekLow'].raw);
-    list.push(html['summaryDetail']['fiftyTwoWeekHigh'].raw);
+    list.push(sd('bid').raw);
+    list.push(sd('ask').raw);
+    list.push(sd('dayLow').raw);
+    list.push(sd('dayHigh').raw);
+    list.push(sd('fiftyTwoWeekLow').raw);
+    list.push(sd('fiftyTwoWeekHigh').raw);
     return list;
 };
 const req = (pair, errorHandler, callback) => request({
@@ -44,7 +46,6 @@ const req = (pair, errorHandler, callback) => request({
  * @returns {Promise<Array<Array<any>>>}
  */
 export function getExchangeDataLowTrafficP(): Promise<Array<Array<any>>> {
-
     return new Promise<Array<Array<any>>>(((resolve, reject) => request({
         url: 'https://finance.yahoo.com/currencies',
         encoding: null
@@ -182,9 +183,8 @@ export function getPairArray(currency: Array<string>, base: Array<string>): Arra
     return list;
 }
 
-export function getUnit(currency: string): string {
-    currency = currency.trim();
-    if (currency.length === 3) {
+const whatCurrency = currency => {
+    {
         switch (currency) {
             case 'AED':
                 return 'د.إ';
@@ -533,8 +533,24 @@ export function getUnit(currency: string): string {
             case 'ZWD':
                 return 'Z$';
             default:
-                return null;
+                return undefined;
         }
-    } else return undefined;
+    }
+};
 
+export function getUnit(currency: string): any {
+    currency = currency.trim().toUpperCase();
+    if (currency.length === 3) return whatCurrency(currency);
+    else {
+        let temp = "";
+        let list = [];
+        for (let a of currency) {
+            temp += a;
+            if (temp.length === 3) {
+                list.push(whatCurrency(temp));
+                temp = "";
+            }
+        }
+        return list;
+    }
 }

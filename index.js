@@ -9,22 +9,24 @@ const remove = (str, remove) => {
 const parseReact = (str, number, num) => str.split(`react-text: ${number} -->`)[num];
 const parseR = (str) => number => parseFloat(remove(parseReact(str, number, 1).split('<')[0], ','));
 const parseHTML = html => parseR(html.toString())(36);
+const getJSON = data => name => data[name];
 const parseHTML2 = (html) => {
     const list = [];
     html = html['quoteSummary'].result[0];
-    const previousClose = html['summaryDetail']['previousClose'].raw;
-    const open = html['summaryDetail']['open'].raw;
+    const sd = getJSON(getJSON(html)('summaryDetail'));
+    const previousClose = sd('previousClose').raw;
+    const open = sd('open').raw;
     list.push((previousClose + open) / 2);
     list.push(html['price']['regularMarketChange'].raw);
     list.push(html['price']['regularMarketChangePercent'].raw * 100);
     list.push(previousClose);
     list.push(open);
-    list.push(html['summaryDetail']['bid'].raw);
-    list.push(html['summaryDetail']['ask'].raw);
-    list.push(html['summaryDetail']['dayLow'].raw);
-    list.push(html['summaryDetail']['dayHigh'].raw);
-    list.push(html['summaryDetail']['fiftyTwoWeekLow'].raw);
-    list.push(html['summaryDetail']['fiftyTwoWeekHigh'].raw);
+    list.push(sd('bid').raw);
+    list.push(sd('ask').raw);
+    list.push(sd('dayLow').raw);
+    list.push(sd('dayHigh').raw);
+    list.push(sd('fiftyTwoWeekLow').raw);
+    list.push(sd('fiftyTwoWeekHigh').raw);
     return list;
 };
 const req = (pair, errorHandler, callback) => request({
@@ -199,9 +201,8 @@ function getPairArray(currency, base) {
     return list;
 }
 exports.getPairArray = getPairArray;
-function getUnit(currency) {
-    currency = currency.trim();
-    if (currency.length === 3) {
+const whatCurrency = currency => {
+    {
         switch (currency) {
             case 'AED':
                 return 'د.إ';
@@ -550,10 +551,25 @@ function getUnit(currency) {
             case 'ZWD':
                 return 'Z$';
             default:
-                return null;
+                return undefined;
         }
     }
-    else
-        return undefined;
+};
+function getUnit(currency) {
+    currency = currency.trim().toUpperCase();
+    if (currency.length === 3)
+        return whatCurrency(currency);
+    else {
+        let temp = "";
+        let list = [];
+        for (let a of currency) {
+            temp += a;
+            if (temp.length === 3) {
+                list.push(whatCurrency(temp));
+                temp = "";
+            }
+        }
+        return list;
+    }
 }
 exports.getUnit = getUnit;

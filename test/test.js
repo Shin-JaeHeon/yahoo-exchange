@@ -9,4 +9,5 @@ index.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(dat
 index.getExchangeDataArray('USDKRW', (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
 index.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
 index.getUnit('KRW');
+index.getUnit('USDKRWJPYEUR');
 index.getPairArray(['USD'], ['KRW', 'JPY']);

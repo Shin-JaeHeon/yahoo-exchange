@@ -146,12 +146,15 @@ getExchangeDataArrayは全体データをコールバック関数で返却しま
     // ['USDKRW','JPYKRW'];
    ```
 ## getUnit(currency:string):string
-通貨の記号($など)を返還してくれます。
+通貨の記号($など)を返還してくれます。 二つ以上の通貨を付けた場合には3文字ずつ分離して配列に返還します。
 ### Example
 * ``` javascript
     const currency = 'USD';
+    const currency2 = 'USDKRW';
     getUnit(currency);
-    // '$';
+    getUnit(currency2);
+    // '$'
+    // [ '$', '₩' ]
   ```
 
 ## getData(pair, callback, errorHandler): void @deprecated

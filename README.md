@@ -135,7 +135,7 @@ It does return fx data (bid and ask) in 5m chart (5分足)
 * USDHKD
 
 ##  getPairArray(currency: Array<string>, base: Array<string>): Array<string>
-It Returns a pair array.
+It returns a pair array.
 ### Example
 * ``` javascript
    const currency = ['USD','JPY'];
@@ -143,13 +143,16 @@ It Returns a pair array.
    getPairArray(currency,base);
    // ['USDKRW','JPYKRW'];
   ```
-## getUnit(currency:string):string
-It Returns a symbol of currency
+## getUnit(currency:string):string or Array<string>
+It Returns a currency sign or a list of currency sign
 ### Example
 * ``` javascript
     const currency = 'USD';
+    const currency2 = 'USDKRW';
     getUnit(currency);
+    getUnit(currency2);
     // '$';
+    // [ '$', '₩' ]
   ```
 
 ## getData(pair, callback, errorHandler): void @deprecated

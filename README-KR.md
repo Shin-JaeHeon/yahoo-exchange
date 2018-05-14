@@ -146,12 +146,15 @@ getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
   ```
 
 ## getUnit(currency:string):string
-통화의 기호($ 등)을 반환합니다.
+통화의 기호($ 등)을 반환합니다. 두개이상의 통화를 넣을 경우 3글자씩 분리되어 배열로 반환합니다.
 ### Example
  * ``` javascript
      const currency = 'USD';
+     const currency2 = 'USDKRW';
      getUnit(currency);
-     // '$';
+     getUnit(currency2);
+     // '$'
+     // [ '$', '₩' ]
 
 ## getData(pair, callback, errorHandler): void @deprecated
 > 1.0에서 제거된 메소드입니다. 2.0에서 삭제될 예정이오니, getExchangeDataArray를 사용하세요.
