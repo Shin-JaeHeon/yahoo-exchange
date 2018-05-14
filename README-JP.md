@@ -7,13 +7,13 @@
 [![npm](https://img.shields.io/badge/Readme-English-lightgray.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README.md)
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
-
+> Yahoo Financeのパーサーが壊れた. そこで,新しいYahoo Finaceのパーサーを作った. ですから,重要な注意点があります. 現在,為替レートは,"クローズ"と"オープン"の平均値として定義されている。
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string または Array\<string\>
 * callback : (Array\<number\>, pair) => any
 * errorHandler : オプションです。 基本メソッドは ```console.log(error)``` です。 
 > ### 警告!
->Bid と Askは一部のフェアではNaNがリターンなります。 該当ペアを捜した方はイッシューに登録してください。
+>Bid と Askは一部のフェアではundefinedがリターンなります。 該当ペアを捜した方はイッシューに登録してください。
 #### 知られたエラー
 * JPYKRW 
 
@@ -37,22 +37,22 @@ Array\<number\>Kは次のような項目が含まれます。 [Now, Changes, Cha
 * ``` javascript
   getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ]
-  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ]
+  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ]
   ```
 * ``` javascript
   getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data), error => console.log('[Error]' + error));
   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] または [Error] error message
-  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] または [Error] error message
+  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] または [Error] error message
   ```
 * ``` javascript
    getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), error => console.log('[Error]' + error));
    // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW または [Error] error message
-   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW または [Error] error message
+   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW または [Error] error message
   ```
 * ``` javascript
    getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), (error,pair) => console.log(`[Error:${pair}]${error}`));
    // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW または [Error:USDKRW] error message
-   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW または [Error:JPYKRW] error message
+   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW または [Error:JPYKRW] error message
   ```
 ### 警告
 getExchangeDataArrayは全体データをコールバック関数で返却しません。
