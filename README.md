@@ -7,12 +7,13 @@
 [![npm](https://img.shields.io/badge/Readme-English-lightgray.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README.md)
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
+> Yahoo Finance parser was broken. So we created a new Yahoo Finace Parser. Now, the exchange rate is defined as the average value of close and open.
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string or Array\<string\>
 * callback : (Array\<number\>, pair) => any
 * errorHandler : options (A default method is ```console.log(error)```) 
 > ### Warning!
->Bid and Ask can be returned NaN by some pair. If you find a pair that has errors, please write the pair at the issue. 
+>Bid and Ask can be returned undefined by some pair. If you find a pair that has errors, please write the pair at the issue.
 #### A known error
 * JPYKRW 
 
@@ -36,22 +37,22 @@ Array\<number\> : [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask
 * ``` javascript
   getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ]
-  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ]
+  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ]
   ```
 * ``` javascript
   getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data), error => console.log('[Error]' + error));
   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] or [Error] error message
-  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] or [Error] error message
+  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] or [Error] error message
   ```
 * ``` javascript
    getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), error => console.log('[Error]' + error));
    // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW or [Error] error message
-   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW or [Error] error message
+   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW or [Error] error message
   ```
 * ``` javascript
    getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), (error,pair) => console.log(`[Error:${pair}]${error}`));
    // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW or [Error:USDKRW] error message
-   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW or [Error:JPYKRW] error message
+   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW or [Error:JPYKRW] error message
   ```
 ### Warning
 getExchangeDataArray does not return Arrays to Callback.

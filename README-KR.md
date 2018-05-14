@@ -7,13 +7,13 @@
 [![npm](https://img.shields.io/badge/Readme-English-lightgray.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README.md)
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
-
+> 야휴 파이낸스를 파서가 작동하지 않아 새로운 파서를 만들었습니다. 이제 환율은 close와 open의 평균값으로 계산됩니다.(그외의 값은 정상입니다.)
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string 또는 Array\<string\>
 * callback : (Array\<number\>, pair) => any
 * errorHandler : 옵션입니다. 기본 메소드는 ```console.log(error)``` 입니다. 
 > ### 경고!
->Bid 와 Ask는 일부 페어에서 NaN이 리턴됩니다. 해당 페어를 찾으신 분은 이슈에 등록하여 주시면 감사하겠습니다.
+>Bid 와 Ask는 일부 페어에서 undefined이 리턴됩니다. 해당 페어를 찾으신 분은 이슈에 등록하여 주시면 감사하겠습니다.
 #### 알려진 에러
 * JPYKRW 
 
@@ -37,22 +37,22 @@ Array\<number\>는 다음과 같은 항목이 포함됩니다. [Now, Changes, Ch
 * ``` javascript
   getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ]
-  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ]
+  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ]
   ```
 * ``` javascript
   getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data), error => console.log('[Error]' + error));
   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] 또는 [Error] error message
-  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] 또는 [Error] error message
+  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] 또는 [Error] error message
   ```
 * ``` javascript
    getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), error => console.log('[Error]' + error));
    // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW 또는 [Error] error message
-   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW 또는 [Error] error message
+   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW 또는 [Error] error message
   ```
 * ``` javascript
    getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), (error,pair) => console.log(`[Error:${pair}]${error}`));
    // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW 또는 [Error:USDKRW] error message
-   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  NaN,  NaN,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW 또는 [Error:JPYKRW] error message
+   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW 또는 [Error:JPYKRW] error message
   ```
 ### 경고
 getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
