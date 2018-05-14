@@ -10,11 +10,6 @@ const parseHTML = html => parseR(html.toString())(36);
 const parseHTML2 = (html: Object) => {
     const list = [];
     html = html['quoteSummary'].result[0];
-    // [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max, 52 Week Range Min, 52 Week Range Max]
-    // list.push(remove(html.split('data-reactid="35">')[1].split('<')[0], ','));
-    // list.push(parseFloat(remove(html.split('<title>')[2].split(' ')[1], ',')));
-    // list.push(parseFloat(remove(html.split('<title>')[3].split(' ')[1].split('%')[0], ',')));
-    // list.push(remove(html.split('data-reactid="41">')[2].split('<')[0], ','));
     const previousClose = html['summaryDetail']['previousClose'].raw;
     const open = html['summaryDetail']['open'].raw;
     list.push((previousClose + open) / 2);
@@ -28,13 +23,6 @@ const parseHTML2 = (html: Object) => {
     list.push(html['summaryDetail']['dayHigh'].raw);
     list.push(html['summaryDetail']['fiftyTwoWeekLow'].raw);
     list.push(html['summaryDetail']['fiftyTwoWeekHigh'].raw);
-    // list.push(r(48));
-    // list.push(r(54));
-    // list.push(r(71));
-    // list.push(parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[0], ',')));
-    // list.push(parseFloat(remove(html.split('data-reactid="61">')[2].split(' ')[2].split('<')[0], ',')));
-    // list.push(parseFloat(remove(html.split('data-reactid="65">')[3].split(' ')[0], ',')));
-    // list.push(parseFloat(remove(html.split('data-reactid="65">')[3].split(' ')[2].split('<')[0], ',')));
     return list;
 };
 const req = (pair, errorHandler, callback) => request({
