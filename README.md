@@ -8,6 +8,7 @@
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
 > Yahoo Finance parser was broken. So we created a new Yahoo Finace Parser. Now, the exchange rate is defined as the average value of close and open.
+> Warning : getExchangeDataLowTraffic and getExchangeDataLowTrafficP returns error. Don't use now.
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string or Array\<string\>
 * callback : (Array\<number\>, pair) => any

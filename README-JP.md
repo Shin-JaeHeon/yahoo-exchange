@@ -8,6 +8,7 @@
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
 > Yahoo Financeのパーサーが壊れた. そこで,新しいYahoo Finaceのパーサーを作った. ですから,重要な注意点があります. 現在,為替レートは,"クローズ"と"オープン"の平均値として定義されている。
+> Warning : getExchangeDataLowTrafficとgetExchangeDataLowTrafficPがいつもエラーを返還します。 今は使用しないでください。
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string または Array\<string\>
 * callback : (Array\<number\>, pair) => any

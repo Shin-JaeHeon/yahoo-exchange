@@ -8,6 +8,7 @@
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
 > 야휴 파이낸스를 파서가 작동하지 않아 새로운 파서를 만들었습니다. 이제 환율은 close와 open의 평균값으로 계산됩니다.(그외의 값은 정상입니다.)
+> Warning : getExchangeDataLowTraffic 와 getExchangeDataLowTrafficP가 항상 에러를 반환합니다. 지금은 사용하지 마십시오.
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string 또는 Array\<string\>
 * callback : (Array\<number\>, pair) => any

@@ -43,6 +43,10 @@ const req = (pair, errorHandler, callback) => request({
         errorHandler(e, pair);
     }
 });
+/**
+ * This method now on error
+ * @returns {Promise<Array<Array<any>>>}
+ */
 function getExchangeDataLowTrafficP() {
     return new Promise(((resolve, reject) => request({
         url: 'https://finance.yahoo.com/currencies',
@@ -55,11 +59,19 @@ function getExchangeDataLowTrafficP() {
             const pair = h.match(/>(...\/...)/gmi);
             const price = h.match(/">([0-9,.]+)/gmi);
             const changes = h.match(/ -->[^0-9reactsp/><\-]*[0-9.\-]+/gmi);
-            resolve(arrayLen24.map((v, a) => [remove(pair[a], '>'), parseFloat(remove(price[a], '\">')), parseFloat(remove(changes[a * 2], " -->")), parseFloat(remove(changes[a * 2 + 1], ' -->'))]));
+            if (changes === null)
+                reject(new Error('Error code: GED-LTP'));
+            else
+                resolve(arrayLen24.map((v, a) => [remove(pair[a], '>'), parseFloat(remove(price[a], '\">')), parseFloat(remove(changes[a * 2], " -->")), parseFloat(remove(changes[a * 2 + 1], ' -->'))]));
         }
     })));
 }
 exports.getExchangeDataLowTrafficP = getExchangeDataLowTrafficP;
+/**
+ * This method now on error
+ * @param {(data: Array<Array<any>>) => any} callback
+ * @param {(error: Error, pair?: String) => any} errorHandler
+ */
 function getExchangeDataLowTraffic(callback, errorHandler = err => console.log(err)) {
     try {
         request({
@@ -73,7 +85,10 @@ function getExchangeDataLowTraffic(callback, errorHandler = err => console.log(e
                 const pair = h.match(/>(...\/...)/gmi);
                 const price = h.match(/">([0-9,.]+)/gmi);
                 const changes = h.match(/ -->[^0-9reactsp/><\-]*[0-9.\-]+/gmi);
-                callback(arrayLen24.map((v, a) => [remove(pair[a], '>'), parseFloat(remove(price[a], '\">')), parseFloat(remove(changes[a * 2], " -->")), parseFloat(remove(changes[a * 2 + 1], ' -->'))]));
+                if (changes === null)
+                    errorHandler(new Error('Error code: GED-LTC'), 'getExchangeDataLowTraffic');
+                else
+                    callback(arrayLen24.map((v, a) => [remove(pair[a], '>'), parseFloat(remove(price[a], '\">')), parseFloat(remove(changes[a * 2], " -->")), parseFloat(remove(changes[a * 2 + 1], ' -->'))]));
             }
         });
     }
