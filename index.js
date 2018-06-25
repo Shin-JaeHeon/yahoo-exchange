@@ -16,13 +16,15 @@ const parseHTML2 = (html) => {
     const sd = getJSON(getJSON(html)('summaryDetail'));
     const previousClose = sd('previousClose').raw;
     const open = sd('open').raw;
-    list.push((previousClose + open) / 2);
+    const bid = sd('bid').raw;
+    const ask = sd('ask').raw;
+    list.push((bid + ask) / 2);
     list.push(html['price']['regularMarketChange'].raw);
     list.push(html['price']['regularMarketChangePercent'].raw * 100);
     list.push(previousClose);
     list.push(open);
-    list.push(sd('bid').raw);
-    list.push(sd('ask').raw);
+    list.push(bid);
+    list.push(ask);
     list.push(sd('dayLow').raw);
     list.push(sd('dayHigh').raw);
     list.push(sd('fiftyTwoWeekLow').raw);
