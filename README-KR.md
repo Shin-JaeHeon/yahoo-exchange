@@ -7,8 +7,11 @@
 [![npm](https://img.shields.io/badge/Readme-English-lightgray.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README.md)
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
-> 기존 파서의 문제점을 해결한 버전인 yahoo-exchange 2.0.0이 출시되었습니다. 이전버전과 호환되지 않습니다. Readme.md를 참고하십시오.
-deprecated된 메소드가 제거되었습니다. 
+> 기존 파서의 문제점을 해결한 버전인 yahoo-exchange 2.0.0이 출시되었습니다.
+ 
+> 이전버전과 호환되지 않습니다.
+
+> deprecated된 메소드가 제거되었습니다. 
 
 > 경고 : getExchangeDataLowTraffic 와 getExchangeDataLowTrafficP가 항상 에러를 반환합니다. 지금은 사용하지 마십시오.
 ## getExchangeDataArray(pair, callback, errorHandler): void
