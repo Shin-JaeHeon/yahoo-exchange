@@ -8,14 +8,14 @@ const remove = (str, remove) => {
 };
 const parseHTML = (html) => {
     const list = [];
-    html = html['quoteSummary'].result[0]['price'];
-    list.push(html['regularMarketPrice'].raw);
-    list.push(html['regularMarketChange'].raw);
-    list.push(html['regularMarketChangePercent'].raw * 100);
-    list.push(html['regularMarketPreviousClose'].raw);
-    list.push(html['regularMarketOpen'].raw);
-    list.push(html['regularMarketDayLow'].raw);
-    list.push(html['regularMarketDayHigh'].raw);
+    const price = html['quoteSummary'].result[0]['price'];
+    list.push(price.regularMarketPrice.raw);
+    list.push(price.regularMarketChange.raw);
+    list.push(price.regularMarketChangePercent.raw * 100);
+    list.push(price.regularMarketPreviousClose.raw);
+    list.push(price.regularMarketOpen.raw);
+    list.push(price.regularMarketDayLow.raw);
+    list.push(price.regularMarketDayHigh.raw);
     return list;
 };
 const req = (pair, errorHandler, callback) => request({
