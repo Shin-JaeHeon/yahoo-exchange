@@ -1,4 +1,4 @@
-# yahoo-exchange 소개
+# yahoo-exchange
 
 [![npm](https://img.shields.io/npm/v/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
 [![npm](https://img.shields.io/npm/dt/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
@@ -7,18 +7,19 @@
 [![npm](https://img.shields.io/badge/Readme-English-lightgray.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README.md)
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
-> 야휴 파이낸스를 파서가 작동하지 않아 새로운 파서를 만들었습니다. 이제 환율은 close와 open의 평균값으로 계산됩니다.(그외의 값은 정상입니다.)
-> Warning : getExchangeDataLowTraffic 와 getExchangeDataLowTrafficP가 항상 에러를 반환합니다. 지금은 사용하지 마십시오.
+> 기존 파서의 문제점을 해결한 버전인 yahoo-exchange 2.0.0이 출시되었습니다. 이전버전과 호환되지 않습니다. Readme.md를 참고하십시오.
+deprecated된 메소드가 제거되었습니다. 
+
+> 경고 : getExchangeDataLowTraffic 와 getExchangeDataLowTrafficP가 항상 에러를 반환합니다. 지금은 사용하지 마십시오.
 ## getExchangeDataArray(pair, callback, errorHandler): void
+> ### v2.0.0 안내
+> 반환하는 항목에서 52 Week Range Min, 52 Week Range Max와 Bid, Ask가 제거되었습니다. 
 * pair : string 또는 Array\<string\>
 * callback : (Array\<number\>, pair) => any
 * errorHandler : 옵션입니다. 기본 메소드는 ```console.log(error)``` 입니다. 
-> ### 경고!
->Bid 와 Ask는 일부 페어에서 undefined이 리턴됩니다. 해당 페어를 찾으신 분은 이슈에 등록하여 주시면 감사하겠습니다.
-#### 알려진 에러
-* JPYKRW 
 
 Array\<number\>는 다음과 같은 항목이 포함됩니다. [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max, 52 Week Range Min, 52 Week Range Max]
+
 ### 예시 코드
 * ``` javascript
   getExchangeDataArray('USDKRW', data => console.log(data)); // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ]
@@ -56,7 +57,7 @@ Array\<number\>는 다음과 같은 항목이 포함됩니다. [Now, Changes, Ch
    // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW 또는 [Error:JPYKRW] error message
   ```
 ### 경고
-getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
+getExchangeDataArray는 Callback에 전체 데이터를 넘겨주지 않습니다.
 
 ## getExchangeDataLowTraffic(callback, errorHandler): void 
 * callback : data:Array\<Array\<any\>\> => any
@@ -156,12 +157,6 @@ getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
      // '$'
      // [ '$', '₩' ]
 
-## getData(pair, callback, errorHandler): void @deprecated
-> 1.0에서 제거된 메소드입니다. 2.0에서 삭제될 예정이오니, getExchangeDataArray를 사용하세요.
-
-## getDataArray(pair, callback, errorHandler): void @deprecated
-> 1.0에서 제거된 메소드입니다. 2.0에서 삭제될 예정이오니, getExchangeDataArray를 사용하세요.
-
 ## test.js
 * ``` javascript
   const yahooExchange = require('yahoo-exchange');
@@ -175,5 +170,5 @@ getExchangeDataArray는 전체 데이터를 넘겨주지 않습니다.
   ```
 
 ## 사용된 라이브러리에 대한 저작권 고지
-아래의 라이브러리의 일부코드가 이 프로젝트에 포함되었습니다.
+아래의 라이브러리의 일부 코드가 이 프로젝트에 포함되었습니다.
 * [currency-symbol-map](https://github.com/bengourley/currency-symbol-map)
