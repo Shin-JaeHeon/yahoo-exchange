@@ -4,3 +4,4 @@
 Makefile
 yarn.loc
 yarn-error.log
+tsconfig.json
