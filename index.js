@@ -6,33 +6,20 @@ const remove = (str, remove) => {
     if (typeof str === 'string')
         return str.replace(remove, '');
 };
-const parseReact = (str, number, num) => str.split(`react-text: ${number} -->`)[num];
-const parseR = (str) => number => parseFloat(remove(parseReact(str, number, 1).split('<')[0], ','));
-const parseHTML = html => parseR(html.toString())(36);
-const getJSON = data => name => data[name];
-const parseHTML2 = (html) => {
+const parseHTML = (html) => {
     const list = [];
-    html = html['quoteSummary'].result[0];
-    const sd = getJSON(getJSON(html)('summaryDetail'));
-    const previousClose = sd('previousClose').raw;
-    const open = sd('open').raw;
-    const bid = sd('bid').raw;
-    const ask = sd('ask').raw;
-    list.push((bid + ask) / 2);
-    list.push(html['price']['regularMarketChange'].raw);
-    list.push(html['price']['regularMarketChangePercent'].raw * 100);
-    list.push(previousClose);
-    list.push(open);
-    list.push(bid);
-    list.push(ask);
-    list.push(sd('dayLow').raw);
-    list.push(sd('dayHigh').raw);
-    list.push(sd('fiftyTwoWeekLow').raw);
-    list.push(sd('fiftyTwoWeekHigh').raw);
+    const price = html['quoteSummary'].result[0]['price'];
+    list.push(price.regularMarketPrice.raw);
+    list.push(price.regularMarketChange.raw);
+    list.push(price.regularMarketChangePercent.raw * 100);
+    list.push(price.regularMarketPreviousClose.raw);
+    list.push(price.regularMarketOpen.raw);
+    list.push(price.regularMarketDayLow.raw);
+    list.push(price.regularMarketDayHigh.raw);
     return list;
 };
 const req = (pair, errorHandler, callback) => request({
-    url: `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${pair}=X?formatted=true&crumb=sxCZygzUaUK&lang=en-US&region=US&modules=price%2CsummaryDetail&corsDomain=finance.yahoo.com`,
+    url: `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${pair}=X?formatted=true&crumb=sxCZygzUaUK&lang=en-US&region=US&modules=price&corsDomain=finance.yahoo.com`,
     timeout: 10000,
     followRedirect: true,
     maxRedirects: 10
@@ -41,7 +28,7 @@ const req = (pair, errorHandler, callback) => request({
         if (err)
             errorHandler(err, pair);
         else
-            callback(parseHTML2(JSON.parse(html)), pair);
+            callback(parseHTML(JSON.parse(html)), pair);
     }
     catch (e) {
         errorHandler(e, pair);
@@ -150,36 +137,6 @@ function getFxYahooJapan(callback, errorHandler = err => console.log(err)) {
     }
 }
 exports.getFxYahooJapan = getFxYahooJapan;
-/**
- * @deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
- */
-function getData(pair, callback, errorHandler = err => console.log(err)) {
-    request({
-        url: `https://finance.yahoo.com/quote/${pair}=X?p=${pair}=X`,
-        encoding: null,
-    }, (err, response, html) => {
-        if (err)
-            errorHandler(err, pair);
-        else
-            callback(parseHTML(html), pair);
-    });
-}
-exports.getData = getData;
-/**
- * @deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
- */
-function getDataArray(pair, callback, errorHandler = err => console.log(err)) {
-    pair.forEach(v => request({
-        url: `https://finance.yahoo.com/quote/${v}=X?p=${v}=X`,
-        encoding: null,
-    }, (err, response, html) => {
-        if (err)
-            errorHandler(err, v);
-        else
-            callback(parseHTML(html), v);
-    }));
-}
-exports.getDataArray = getDataArray;
 function getExchangeDataArray(pair, callback, errorHandler = err => console.log(err)) {
     try {
         if (typeof pair === 'string')

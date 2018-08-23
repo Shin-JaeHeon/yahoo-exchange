@@ -7,16 +7,19 @@
 [![npm](https://img.shields.io/badge/Readme-English-lightgray.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README.md)
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
-> Yahoo Financeのパーサーが壊れた. そこで,新しいYahoo Finaceのパーサーを作った. ですから,重要な注意点があります. 現在,為替レートは,"クローズ"と"オープン"の平均値として定義されている。
+> 従来のParserの問題点を解決したバージョンであるyahoo-exchange 2.0.0が発売されました。
+
+> 以前のバージョンと互換されません。
+
+> deprecatedされたメソッドが除去されました。
+
 > Warning : getExchangeDataLowTrafficとgetExchangeDataLowTrafficPがいつもエラーを返還します。 今は使用しないでください。
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string または Array\<string\>
 * callback : (Array\<number\>, pair) => any
 * errorHandler : オプションです。 基本メソッドは ```console.log(error)``` です。 
-> ### 警告!
->Bid と Askは一部のフェアではundefinedがリターンなります。 該当ペアを捜した方はイッシューに登録してください。
-#### 知られたエラー
-* JPYKRW 
+>###v2.0.0の案内
+>返還した項目で52 Week Range Min、52 Week Range MaxとBid、Askが除去されました。
 
 Array\<number\>Kは次のような項目が含まれます。 [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max, 52 Week Range Min, 52 Week Range Max]
 ### 例示コード
@@ -156,12 +159,6 @@ getExchangeDataArrayは全体データをコールバック関数で返却しま
     // '$'
     // [ '$', '₩' ]
   ```
-
-## getData(pair, callback, errorHandler): void @deprecated
-> 1.0で除去されたメソッドです。 2.0で削除される予定ですので、getExchangeDataArrayを使用してください。
-
-## getDataArray(pair, callback, errorHandler): void @deprecated
-> 1.0で除去されたメソッドです。 2.0で削除される予定ですので、getExchangeDataArrayを使用してください。
 
 ## test.js
 * ``` javascript

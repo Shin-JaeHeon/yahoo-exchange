@@ -7,16 +7,19 @@
 [![npm](https://img.shields.io/badge/Readme-English-lightgray.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README.md)
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
-> Yahoo Finance parser was broken. So we created a new Yahoo Finace Parser. Now, the exchange rate is defined as the average value of close and open.
+> yahoo-exchange 2.0.0, a version that solves the problem of existing parser, has been  released. 
+
+>Not backward compatible.
+ 
+> The deprecated method has been removed.
+
 > Warning : getExchangeDataLowTraffic and getExchangeDataLowTrafficP returns error. Don't use now.
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string or Array\<string\>
 * callback : (Array\<number\>, pair) => any
 * errorHandler : options (A default method is ```console.log(error)```) 
-> ### Warning!
->Bid and Ask can be returned undefined by some pair. If you find a pair that has errors, please write the pair at the issue.
-#### A known error
-* JPYKRW 
+> ### Introduction to v2.0.0
+> 52 Week Range Min, 52 Week Range Max, Bid, Ask have been removed from the returned items.
 
 Array\<number\> : [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max, 52 Week Range Min, 52 Week Range Max]
 ### Example
@@ -154,13 +157,7 @@ It Returns a currency sign or a list of currency sign
     // '$';
     // [ '$', '₩' ]
   ```
-
-## getData(pair, callback, errorHandler): void @deprecated
-> deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
-
-## getDataArray(pair, callback, errorHandler): void @deprecated
-> deprecated Since version 1.0. Will be deleted in version 2.0. Use getExchangeDataArray instead.
-
+ 
 ## test.js
 * ``` javascript
   const yahooExchange = require('yahoo-exchange');
