@@ -22,43 +22,6 @@
 * errorHandler : 옵션입니다. 기본 메소드는 ```console.log(error)``` 입니다. 
 
 Array\<number\>는 다음과 같은 항목이 포함됩니다. [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max, 52 Week Range Min, 52 Week Range Max]
-
-### 예시 코드
-* ``` javascript
-  getExchangeDataArray('USDKRW', data => console.log(data)); // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ]
-  ```
-* ``` javascript
-  getExchangeDataArray('USDKRW', data => console.log(data), error => console.log('[Error]' + error));
-  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] 또는 [Error] error message
-  ```
-* ``` javascript
-  getExchangeDataArray('USDKRW', (data,pair) => console.log(data,pair), error => console.log('[Error]' + error));
-  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDRKW 또는 [Error] error message
-  ```
-* ``` javascript
-  getExchangeDataArray('USDKRW', (data,pair) => console.log(data,pair), (error,pair) => console.log(`[Error:${pair}]${error}`));
-   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW 또는 [Error:USDKRW] error message
-  ```
-* ``` javascript
-  getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
-  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ]
-  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ]
-  ```
-* ``` javascript
-  getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data), error => console.log('[Error]' + error));
-  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] 또는 [Error] error message
-  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] 또는 [Error] error message
-  ```
-* ``` javascript
-   getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), error => console.log('[Error]' + error));
-   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW 또는 [Error] error message
-   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW 또는 [Error] error message
-  ```
-* ``` javascript
-   getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), (error,pair) => console.log(`[Error:${pair}]${error}`));
-   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW 또는 [Error:USDKRW] error message
-   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW 또는 [Error:JPYKRW] error message
-  ```
 ### 경고
 getExchangeDataArray는 Callback에 전체 데이터를 넘겨주지 않습니다.
 
@@ -100,37 +63,23 @@ getExchangeDataArray는 Callback에 전체 데이터를 넘겨주지 않습니�
 
 ## getPairArray(currency: Array<string>, base: Array<string>): Array<string>
 페어 목록을 생성해 줍니다.
-### 예시 코드
-* ``` javascript
-   const currency = ['USD','JPY'];
-   const base = ['KRW'];
-   getPairArray(currency,base);
-   // ['USDKRW','JPYKRW'];
-  ```
-
 ## getUnit(currency:string):string
 통화의 기호($ 등)을 반환합니다. 두개이상의 통화를 넣을 경우 3글자씩 분리되어 배열로 반환합니다.
-### Example
- * ``` javascript
-     const currency = 'USD';
-     const currency2 = 'USDKRW';
-     getUnit(currency);
-     getUnit(currency2);
-     // '$'
-     // [ '$', '₩' ]
-
 ## test.js
 * ``` javascript
   const yahooExchange = require('yahoo-exchange');
-  yahooExchange.getExchangeDataArray('USDKRW', data => console.log(data));
+  yahooExchange.getFxYahooJapan(v => console.log(v));
+  yahooExchange.getExchangeDataLowTraffic(v => console.log(v));
+  yahooExchange.getExchangeDataLowTrafficP().then(v => console.log(v));
   yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
   yahooExchange.getExchangeDataArray('USDKRW', (data, pair) => console.log(data, pair));
   yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair));
   yahooExchange.getExchangeDataArray('USDKRW', (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
   yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
-
+  yahooExchange.getUnit('KRW');
+  yahooExchange.getUnit('USDKRWJPYEUR');
+  yahooExchange.getPairArray(['USD'], ['KRW', 'JPY']);
   ```
-
 ## 사용된 라이브러리에 대한 저작권 고지
 아래의 라이브러리의 일부 코드가 이 프로젝트에 포함되었습니다.
 * [currency-symbol-map](https://github.com/bengourley/currency-symbol-map)

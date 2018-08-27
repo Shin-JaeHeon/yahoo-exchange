@@ -22,42 +22,6 @@
 >返還した項目で52 Week Range Min、52 Week Range MaxとBid、Askが除去されました。
 
 Array\<number\>Kは次のような項目が含まれます。 [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max, 52 Week Range Min, 52 Week Range Max]
-### 例示コード
-* ``` javascript
-  getExchangeDataArray('USDKRW', data => console.log(data)); // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ]
-  ```
-* ``` javascript
-  getExchangeDataArray('USDKRW', data => console.log(data), error => console.log('[Error]' + error));
-  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] または [Error] error message
-  ```
-* ``` javascript
-  getExchangeDataArray('USDKRW', (data,pair) => console.log(data,pair), error => console.log('[Error]' + error));
-  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDRKW または [Error] error message
-  ```
-* ``` javascript
-  getExchangeDataArray('USDKRW', (data,pair) => console.log(data,pair), (error,pair) => console.log(`[Error:${pair}]${error}`));
-   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW または [Error:USDKRW] error message
-  ```
-* ``` javascript
-  getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
-  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ]
-  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ]
-  ```
-* ``` javascript
-  getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data), error => console.log('[Error]' + error));
-  // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] または [Error] error message
-  // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] または [Error] error message
-  ```
-* ``` javascript
-   getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), error => console.log('[Error]' + error));
-   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW または [Error] error message
-   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW または [Error] error message
-  ```
-* ``` javascript
-   getExchangeDataArray(['USDKRW', 'JPYKRW'], (data,pair) => console.log(data, pair)), (error,pair) => console.log(`[Error:${pair}]${error}`));
-   // [ 1071.27,  0.88,  0.08,  -0.11,  1070.22,  1071.27,  1072.27,  1069.13,  1072.45,  1055.21,  1158.36 ] USDKRW または [Error:USDKRW] error message
-   // [ 10.08,  0.03,  0.34,  -0.11,  10.047,  undefined,  undefined,  10.08,  10.065,  10.0245,  10.0968 ] JPYKRW または [Error:JPYKRW] error message
-  ```
 ### 警告
 getExchangeDataArrayは全体データをコールバック関数で返却しません。
 
@@ -101,35 +65,22 @@ getExchangeDataArrayは全体データをコールバック関数で返却しま
 
 ## getPairArray(currency: Array<string>, base: Array<string>): Array<string>
 フェアリストを生成してくれます。
-### 例示コード
-* ``` javascript
-    const currency = ['USD','JPY'];
-    const base = ['KRW'];
-    getPairArray(currency,base);
-    // ['USDKRW','JPYKRW'];
-   ```
 ## getUnit(currency:string):string
 通貨の記号($など)を返還してくれます。 二つ以上の通貨を付けた場合には3文字ずつ分離して配列に返還します。
-### Example
-* ``` javascript
-    const currency = 'USD';
-    const currency2 = 'USDKRW';
-    getUnit(currency);
-    getUnit(currency2);
-    // '$'
-    // [ '$', '₩' ]
-  ```
-
 ## test.js
 * ``` javascript
   const yahooExchange = require('yahoo-exchange');
-  yahooExchange.getExchangeDataArray('USDKRW', data => console.log(data));
+  yahooExchange.getFxYahooJapan(v => console.log(v));
+  yahooExchange.getExchangeDataLowTraffic(v => console.log(v));
+  yahooExchange.getExchangeDataLowTrafficP().then(v => console.log(v));
   yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
   yahooExchange.getExchangeDataArray('USDKRW', (data, pair) => console.log(data, pair));
   yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair));
   yahooExchange.getExchangeDataArray('USDKRW', (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
   yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
-
+  yahooExchange.getUnit('KRW');
+  yahooExchange.getUnit('USDKRWJPYEUR');
+  yahooExchange.getPairArray(['USD'], ['KRW', 'JPY']);
   ```
 ### 翻訳の誤りはイッシューに登録してください。
 
