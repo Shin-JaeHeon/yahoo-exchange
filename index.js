@@ -35,8 +35,7 @@ const req = (pair, errorHandler, callback) => request({
     }
 });
 /**
- * This method now on error
- * @returns {Promise<Array<Array<any>>>}
+ * @deprecated
  */
 function getExchangeDataLowTrafficP() {
     return new Promise(((resolve, reject) => request({
@@ -59,9 +58,7 @@ function getExchangeDataLowTrafficP() {
 }
 exports.getExchangeDataLowTrafficP = getExchangeDataLowTrafficP;
 /**
- * This method now on error
- * @param {(data: Array<Array<any>>) => any} callback
- * @param {(error: Error, pair?: String) => any} errorHandler
+ * @deprecated
  */
 function getExchangeDataLowTraffic(callback, errorHandler = err => console.log(err)) {
     try {

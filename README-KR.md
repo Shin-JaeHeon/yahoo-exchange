@@ -62,51 +62,10 @@ Array\<number\>는 다음과 같은 항목이 포함됩니다. [Now, Changes, Ch
 ### 경고
 getExchangeDataArray는 Callback에 전체 데이터를 넘겨주지 않습니다.
 
-## getExchangeDataLowTraffic(callback, errorHandler): void 
-* callback : data:Array\<Array\<any\>\> => any
-* errorHandler : options (A default method is ```err => console.log(err)```) 
-### 예시 코드
-* ``` javascript
-  index.getExchangeDataLowTraffic(v => console.log(v));
-  // [['EUR/USD', 8, 143.647461, 1.709399], ... more 23 items]
-  ```
-## getExchangeDataLowTrafficP(): Promise<Array<Array<any>>>
-### 예시 코드
-* ``` javascript
-  index.getExchangeDataLowTrafficP().then(v => console.log(v))
-  // [['EUR/USD', 8, 143.647461, 1.709399], ... more 23 items]
-  ```
-
-## getExchangeDataLowTraffic 와 getExchangeDataLowTrafficP은 무엇인가요?
-아래에 적혀있는 24개 페어의 데이터를 1번의 리퀘스트로 얻을 수 있어 속도가 빠르며, 서버의 자원을 덜 사용합니다.
-아래의 페어를 사용하시는 분이라면, 이 메소드를 사용하시는 것을 권장드립니다.  
-### 이용 가능한 페어 목록
- * EUR/USD
- * USD/JPY
- * GBP/USD
- * AUD/USD
- * NZD/USD
- * EUR/JPY
- * GBP/JPY
- * EUR/GBP
- * EUR/CAD
- * EUR/SEK
- * EUR/CHF
- * EUR/HUF
- * EUR/JPY
- * USD/CNY
- * USD/HKD
- * USD/SGD
- * USD/INR
- * USD/MXN
- * USD/PHP
- * USD/IDR
- * USD/THB
- * USD/MYR
- * USD/ZAR
- * USD/RUB
-### getExchangeDataLowTrafficP는 무엇인가요?
-```Promise```로 반환합니다.
+## getExchangeDataLowTraffic() @deprecated
+> 2.0.2에서 제거된 메소드입니다. 3.0에서 삭제될 예정이오니, getExchangeDataArray를 사용하세요.
+## getExchangeDataLowTrafficP() @deprecated
+> 2.0.2에서 제거된 메소드입니다. 3.0에서 삭제될 예정이오니, getExchangeDataArray를 사용하세요.
 ## getFxYahooJapan(callback, errorHandler): void 
 
 * callback : (data:Object)=> any

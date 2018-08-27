@@ -6,7 +6,7 @@ const remove = (str: string, remove: string) => {
 };
 const parseHTML = (html: Object) => {
   const list = [];
- const price= html['quoteSummary'].result[0]['price'];
+  const price = html['quoteSummary'].result[0]['price'];
   list.push(price.regularMarketPrice.raw);
   list.push(price.regularMarketChange.raw);
   list.push(price.regularMarketChangePercent.raw * 100);
@@ -31,8 +31,7 @@ const req = (pair, errorHandler, callback) => request({
 });
 
 /**
- * This method now on error
- * @returns {Promise<Array<Array<any>>>}
+ * @deprecated
  */
 export function getExchangeDataLowTrafficP(): Promise<Array<Array<any>>> {
   return new Promise<Array<Array<any>>>(((resolve, reject) => request({
@@ -52,9 +51,7 @@ export function getExchangeDataLowTrafficP(): Promise<Array<Array<any>>> {
 }
 
 /**
- * This method now on error
- * @param {(data: Array<Array<any>>) => any} callback
- * @param {(error: Error, pair?: String) => any} errorHandler
+ * @deprecated
  */
 export function getExchangeDataLowTraffic(callback: (data: Array<Array<any>>) => any, errorHandler: (error: Error, pair?: String) => any = err => console.log(err)): void {
   try {

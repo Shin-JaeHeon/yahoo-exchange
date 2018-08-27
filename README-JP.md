@@ -61,51 +61,11 @@ Array\<number\>Kは次のような項目が含まれます。 [Now, Changes, Cha
 ### 警告
 getExchangeDataArrayは全体データをコールバック関数で返却しません。
 
-## getExchangeDataLowTraffic(callback, errorHandler): void 
-* callback : data:Array\<Array\<any\>\> => any
-* errorHandler : options (A default method is ```err => console.log(err)```) 
-### 例示コード
-* ``` javascript
-  index.getExchangeDataLowTraffic(v => console.log(v));
-  // [['EUR/USD', 8, 143.647461, 1.709399], ... more 23 items]
-  ```
-## getExchangeDataLowTrafficP(): Promise<Array<Array<any>>>
-### 例示コード
-* ``` javascript
-  index.getExchangeDataLowTrafficP().then(v => console.log(v))
-  // [['EUR/USD', 8, 143.647461, 1.709399], ... more 23 items]
-  ```
+## getExchangeDataLowTraffic() @deprecated
+> 2.0.2で除去されたメソッドです。 3.0で削除される予定ですので、getExchangeDataArrayを使用してください。
+## getExchangeDataLowTrafficP() @deprecated
+> 2.0.2で除去されたメソッドです。 3.0で削除される予定ですので、getExchangeDataArrayを使用してください。
 
-## getExchangeDataLowTraffic と getExchangeDataLowTrafficPは何ですか。
-下に書かれている24のペアのデータを1回のリクエストで得られるため、速度が速く、サーバの資源を少なく使用します。
-下記のペアを使用する方なら、このメソッドを使用したことを推奨致します。
-### 利用可能なペアの一覧
- * EUR/USD
- * USD/JPY
- * GBP/USD
- * AUD/USD
- * NZD/USD
- * EUR/JPY
- * GBP/JPY
- * EUR/GBP
- * EUR/CAD
- * EUR/SEK
- * EUR/CHF
- * EUR/HUF
- * EUR/JPY
- * USD/CNY
- * USD/HKD
- * USD/SGD
- * USD/INR
- * USD/MXN
- * USD/PHP
- * USD/IDR
- * USD/THB
- * USD/MYR
- * USD/ZAR
- * USD/RUB
-### getExchangeDataLowTrafficPは何ですか。
-```Promise```に返還します。
 ## getFxYahooJapan(callback, errorHandler): void 
 
 * callback : (data:Object)=> any

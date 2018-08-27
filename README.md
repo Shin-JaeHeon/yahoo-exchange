@@ -9,10 +9,6 @@
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
 > yahoo-exchange 2.0.0, a version that solves the problem of existing parser, has been  released. 
 
->Not backward compatible.
- 
-> The deprecated method has been removed.
-
 > Warning : getExchangeDataLowTraffic and getExchangeDataLowTrafficP returns error. Don't use now.
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string or Array\<string\>
@@ -61,51 +57,10 @@ Array\<number\> : [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask
 ### Warning
 getExchangeDataArray does not return Arrays to Callback.
 
-## getExchangeDataLowTraffic(callback, errorHandler): void 
-* callback : data:Array\<Array\<any\>\> => any
-* errorHandler : options (A default method is ```err => console.log(err)```) 
-### Example
-* ``` javascript
-  index.getExchangeDataLowTraffic(v => console.log(v));
-  // [['EUR/USD', 8, 143.647461, 1.709399], ... more 23 items]
-  ```
-## getExchangeDataLowTrafficP(): Promise<Array<Array<any>>>
-### Example
-* ``` javascript
-  index.getExchangeDataLowTrafficP().then(v => console.log(v))
-  // [['EUR/USD', 8, 143.647461, 1.709399], ... more 23 items]
-  ```
-
-## What is getExchangeDataLowTraffic and getExchangeDataLowTrafficP?
-It just does one request and get data of 24 pairs.
-If you use the following pair, it is recommended that you use this method.
-### What pairs are available?
- * EUR/USD
- * USD/JPY
- * GBP/USD
- * AUD/USD
- * NZD/USD
- * EUR/JPY
- * GBP/JPY
- * EUR/GBP
- * EUR/CAD
- * EUR/SEK
- * EUR/CHF
- * EUR/HUF
- * EUR/JPY
- * USD/CNY
- * USD/HKD
- * USD/SGD
- * USD/INR
- * USD/MXN
- * USD/PHP
- * USD/IDR
- * USD/THB
- * USD/MYR
- * USD/ZAR
- * USD/RUB
-### What is getExchangeDataLowTrafficP?
-It returns data using Promise.
+## getExchangeDataLowTraffic() @deprecated
+> deprecated Since version 2.0.2. Will be deleted in version 3.0. Use getExchangeDataArray instead.
+## getExchangeDataLowTrafficP() @deprecated
+> deprecated Since version 2.0.2. Will be deleted in version 3.0. Use getExchangeDataArray instead.
 ## getFxYahooJapan(callback, errorHandler): void 
 
 * callback : (data:Object)=> any
