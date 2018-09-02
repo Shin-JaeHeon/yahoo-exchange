@@ -7,13 +7,17 @@
 [![npm](https://img.shields.io/badge/Readme-English-lightgray.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README.md)
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
-> 기존 파서의 문제점을 해결한 버전인 yahoo-exchange 2.0.0이 출시되었습니다.
- 
-> 이전버전과 호환되지 않습니다.
 
-> deprecated된 메소드가 제거되었습니다. 
+## getExchangeData(pair): Promise<Array<[number[], string]>> 
+* pair : string 또는 Array\<string\>
+* number[] : [Now, Changes, Changes percent, Previous Close, Open, Day's Range Min, Day's Range Max]
+* string[] : pair 
 
-> 경고 : getExchangeDataLowTraffic 와 getExchangeDataLowTrafficP가 항상 에러를 반환합니다. 지금은 사용하지 마십시오.
+`getExchangeDataArray`와 다르게 모든 요청이 완료될 때까지 기다린 후 Promise로 반환합니다.
+
+이 메소드는 2018년 9월 2일(KST)에 제작되었습니다. 
+
+
 ## getExchangeDataArray(pair, callback, errorHandler): void
 > ### v2.0.0 안내
 > 반환하는 항목에서 52 Week Range Min, 52 Week Range Max와 Bid, Ask가 제거되었습니다. 
@@ -21,7 +25,7 @@
 * callback : (Array\<number\>, pair) => any
 * errorHandler : 옵션입니다. 기본 메소드는 ```console.log(error)``` 입니다. 
 
-Array\<number\>는 다음과 같은 항목이 포함됩니다. [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max, 52 Week Range Min, 52 Week Range Max]
+Array\<number\>는 다음과 같은 항목이 포함됩니다. [Now, Changes, Changes percent, Previous Close, Open, Day's Range Min, Day's Range Max]
 ### 경고
 getExchangeDataArray는 Callback에 전체 데이터를 넘겨주지 않습니다.
 
@@ -63,23 +67,10 @@ getExchangeDataArray는 Callback에 전체 데이터를 넘겨주지 않습니�
 
 ## getPairArray(currency: Array<string>, base: Array<string>): Array<string>
 페어 목록을 생성해 줍니다.
+
 ## getUnit(currency:string):string
 통화의 기호($ 등)을 반환합니다. 두개이상의 통화를 넣을 경우 3글자씩 분리되어 배열로 반환합니다.
-## test.js
-* ``` javascript
-  const yahooExchange = require('yahoo-exchange');
-  yahooExchange.getFxYahooJapan(v => console.log(v));
-  yahooExchange.getExchangeDataLowTraffic(v => console.log(v));
-  yahooExchange.getExchangeDataLowTrafficP().then(v => console.log(v));
-  yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
-  yahooExchange.getExchangeDataArray('USDKRW', (data, pair) => console.log(data, pair));
-  yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair));
-  yahooExchange.getExchangeDataArray('USDKRW', (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
-  yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
-  yahooExchange.getUnit('KRW');
-  yahooExchange.getUnit('USDKRWJPYEUR');
-  yahooExchange.getPairArray(['USD'], ['KRW', 'JPY']);
-  ```
+
 ## 사용된 라이브러리에 대한 저작권 고지
 아래의 라이브러리의 일부 코드가 이 프로젝트에 포함되었습니다.
 * [currency-symbol-map](https://github.com/bengourley/currency-symbol-map)

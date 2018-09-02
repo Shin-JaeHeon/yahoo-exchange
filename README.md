@@ -1,5 +1,4 @@
 # yahoo-exchange
-
 [![npm](https://img.shields.io/npm/v/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
 [![npm](https://img.shields.io/npm/dt/yahoo-exchange.svg?style=flat-square)](https://www.npmjs.com/package/yahoo-exchange)
 [![npm](https://img.shields.io/npm/l/yahoo-exchange.svg?registry_uri=https%3A%2F%2Fregistry.npmjs.com&style=flat-square)](https://opensource.org/licenses/MIT)
@@ -7,17 +6,24 @@
 [![npm](https://img.shields.io/badge/Readme-English-lightgray.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README.md)
 [![npm](https://img.shields.io/badge/Readme-한국어-blue.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-KR.md)
 [![npm](https://img.shields.io/badge/Readme-日本語-orange.svg?style=flat-square)](https://github.com/Shin-JaeHeon/yahoo-exchange/blob/master/README-JP.md)
-> yahoo-exchange 2.0.0, a version that solves the problem of existing parser, has been  released. 
 
-> Warning : getExchangeDataLowTraffic and getExchangeDataLowTrafficP returns error. Don't use now.
+## getExchangeData(pair): Promise<Array<[number[], string]>> 
+* pair : string or Array\<string\>
+* number[] : [Now, Changes, Changes percent, Previous Close, Open, Day's Range Min, Day's Range Max]
+* string[] : pair 
+
+Unlike `getExchangeDataArray`, it waits for all requests to complete before returning to `Promise`.
+
+This method was created on 2018.09.02(KST)
+
 ## getExchangeDataArray(pair, callback, errorHandler): void
 * pair : string or Array\<string\>
 * callback : (Array\<number\>, pair) => any
-* errorHandler : options (A default method is ```console.log(error)```) 
+* errorHandler : options (A default method is  ```console.log(error)```) 
 > ### Introduction to v2.0.0
 > 52 Week Range Min, 52 Week Range Max, Bid, Ask have been removed from the returned items.
 
-Array\<number\> : [Now, Changes, Changes percent, Previous Close, Open, Bid, Ask, Day's Range Min, Day's Range Max, 52 Week Range Min, 52 Week Range Max]
+Array\<number\> : [Now, Changes, Changes percent, Previous Close, Open, Day's Range Min, Day's Range Max]
 
 ### Warning
 getExchangeDataArray does not return Arrays to Callback.
@@ -60,21 +66,6 @@ It does return fx data (bid and ask) in 5m chart (5分足)
 It returns a pair array.
 ## getUnit(currency:string):string or Array<string>
 It Returns a currency sign or a list of currency sign.
-## test.js
-* ``` javascript
-  const yahooExchange = require('yahoo-exchange');
-  yahooExchange.getFxYahooJapan(v => console.log(v));
-  yahooExchange.getExchangeDataLowTraffic(v => console.log(v));
-  yahooExchange.getExchangeDataLowTrafficP().then(v => console.log(v));
-  yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], data => console.log(data));
-  yahooExchange.getExchangeDataArray('USDKRW', (data, pair) => console.log(data, pair));
-  yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair));
-  yahooExchange.getExchangeDataArray('USDKRW', (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
-  yahooExchange.getExchangeDataArray(['USDKRW', 'JPYKRW'], (data, pair) => console.log(data, pair), (error, pair) => console.log(`[Error] ${pair}\n${error}`));
-  yahooExchange.getUnit('KRW');
-  yahooExchange.getUnit('USDKRWJPYEUR');
-  yahooExchange.getPairArray(['USD'], ['KRW', 'JPY']);
-  ```
 ## A copyright notice on the library used
 Some of the code from the library below has been included in this project.
 * [currency-symbol-map](https://github.com/bengourley/currency-symbol-map)

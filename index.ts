@@ -1,4 +1,5 @@
 import request = require('request');
+import requestPromise = require('request-promise');
 
 const arrayLen24 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const remove = (str: string, remove: string) => {
@@ -122,7 +123,7 @@ export function getFxYahooJapan(callback: (data: Object) => any, errorHandler: (
   }
 }
 
-export function getExchangeDataArray(pair: any, callback: (data: Array<number>, pair?: string) => any, errorHandler: (error: Error, pair?: String) => any = err => console.log(err)): void {
+export function getExchangeDataArray(pair: any, callback: (data: number[], pair?: string) => any, errorHandler: (error: Error, pair?: String) => any = err => console.log(err)): void {
   try {
     if (typeof pair === 'string') req(pair, errorHandler, callback);
     else if (Array.isArray(pair)) pair.forEach(v => req(v, errorHandler, callback));
@@ -130,6 +131,25 @@ export function getExchangeDataArray(pair: any, callback: (data: Array<number>, 
   } catch (e) {
     errorHandler(e, 'getExchangeDataArray');
   }
+}
+
+/**
+ * This function returns exchange data via Promise.
+ * @param pair ex) USDKRW, JPYKRW. etc...
+ */
+export function getExchangeData(pair: string | Array<string>): Promise<Array<[number[], string]>> {
+  const pairArray = typeof pair === 'string' ? [pair] : (Array.isArray(pair)) ? pair : null;
+  return new Promise((resolve, reject) => !!pairArray ?
+    Promise.all(pairArray.map(pair =>
+      new Promise((resolve, reject) =>
+        requestPromise({
+          url: `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${pair}=X?modules=price`, json: true
+        })
+          .then(data => resolve(parseHTML(data)))
+          .catch(err => reject([err, pair])))))
+      .then((v: [number[], string][]) => resolve(v))
+      .catch(v => resolve(v))
+    : reject('A pair must be "string" or "array".'));
 }
 
 export function getPairArray(currency: Array<string>, base: Array<string>): Array<string> {

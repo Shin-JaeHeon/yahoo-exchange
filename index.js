@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const request = require("request");
+const requestPromise = require("request-promise");
 const arrayLen24 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const remove = (str, remove) => {
     if (typeof str === 'string')
@@ -148,6 +149,23 @@ function getExchangeDataArray(pair, callback, errorHandler = err => console.log(
     }
 }
 exports.getExchangeDataArray = getExchangeDataArray;
+/**
+ * This function returns exchange data via Promise.
+ * @param pair ex) USDKRW, JPYKRW. etc...
+ */
+function getExchangeData(pair) {
+    const pairArray = typeof pair === 'string' ? [pair] : (Array.isArray(pair)) ? pair : null;
+    return new Promise((resolve, reject) => !!pairArray ?
+        Promise.all(pairArray.map(pair => new Promise((resolve, reject) => requestPromise({
+            url: `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${pair}=X?modules=price`, json: true
+        })
+            .then(data => resolve(parseHTML(data)))
+            .catch(err => reject([err, pair])))))
+            .then((v) => resolve(v))
+            .catch(v => resolve(v))
+        : reject('A pair must be "string" or "array".'));
+}
+exports.getExchangeData = getExchangeData;
 function getPairArray(currency, base) {
     let list = [];
     currency.forEach(v => base.forEach(v2 => {
