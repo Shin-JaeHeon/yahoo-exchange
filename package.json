@@ -11,7 +11,8 @@
     "email": "heoni0504@gmail.com"
   },
   "main": "index.js",
-  "version": "2.1.0",
+  "types": "./types/yahoo-exchange/index.d.ts",
+  "version": "2.1.1",
   "license": "MIT",
   "dependencies": {
     "request": "2.88.0",
