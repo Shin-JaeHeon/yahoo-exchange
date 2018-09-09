@@ -42,27 +42,11 @@ getExchangeDataArrayは全体データをコールバック関数で返却しま
 これは、ヤフージャパンのFXデータ(bidとask)を返還します。 (5分足のデータです。）
 
 ### 返還したペアの一覧
-* USDJPY
-* EURJPY
-* AUDJPY
-* GBPJPY
-* NZDJPY
-* CADJPY
-* CHFJPY
-* ZARJPY
-* CNHJPY
-* EURUSD
-* GBPUSD
-* AUDUSD
-* NZDUSD
-* HKDJPY
+* USDJPY, EURJPY, AUDJPY, GBPJPY, NZDJPY, CADJPY, CHFJPY, ZARJPY, CNHJPY
+* EURUSD, GBPUSD, AUDUSD, NZDUSD, HKDJPY
 * EURGBP
 * EURAUD
-* USDCHF
-* EURCHF
-* GBPCHF
-* AUDCHF
-* CADCHF
+* USDCHF, EURCHF, GBPCHF, AUDCHF, CADCHF
 * USDHKD
 
 ## getPairArray(currency: Array<string>, base: Array<string>): Array<string>

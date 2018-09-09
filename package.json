@@ -12,7 +12,7 @@
   },
   "main": "index.js",
   "types": "./types/yahoo-exchange/index.d.ts",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "license": "MIT",
   "dependencies": {
     "request": "2.88.0",

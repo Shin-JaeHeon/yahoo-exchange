@@ -42,27 +42,11 @@ getExchangeDataArray는 Callback에 전체 데이터를 넘겨주지 않습니�
 
 이 메소드는 야후 재팬 5분차트(5分足) FX 데이터(bid와 ask)를 반환합니다.
 ### 반환하는 페어 목록
-* USDJPY
-* EURJPY
-* AUDJPY
-* GBPJPY
-* NZDJPY
-* CADJPY
-* CHFJPY
-* ZARJPY
-* CNHJPY
-* EURUSD
-* GBPUSD
-* AUDUSD
-* NZDUSD
-* HKDJPY
+* USDJPY, EURJPY, AUDJPY, GBPJPY, NZDJPY, CADJPY, CHFJPY, ZARJPY, CNHJPY
+* EURUSD, GBPUSD, AUDUSD, NZDUSD, HKDJPY
 * EURGBP
 * EURAUD
-* USDCHF
-* EURCHF
-* GBPCHF
-* AUDCHF
-* CADCHF
+* USDCHF, EURCHF, GBPCHF, AUDCHF, CADCHF
 * USDHKD
 
 ## getPairArray(currency: Array<string>, base: Array<string>): Array<string>

@@ -40,27 +40,11 @@ getExchangeDataArray does not return Arrays to Callback.
 * errorHandler : options (A default method is ```err => console.log(err)```)
 It does return fx data (bid and ask) in 5m chart (5分足)
 ### What pairs are available?
-* USDJPY
-* EURJPY
-* AUDJPY
-* GBPJPY
-* NZDJPY
-* CADJPY
-* CHFJPY
-* ZARJPY
-* CNHJPY
-* EURUSD
-* GBPUSD
-* AUDUSD
-* NZDUSD
-* HKDJPY
+* USDJPY, EURJPY, AUDJPY, GBPJPY, NZDJPY, CADJPY, CHFJPY, ZARJPY, CNHJPY
+* EURUSD, GBPUSD, AUDUSD, NZDUSD, HKDJPY
 * EURGBP
 * EURAUD
-* USDCHF
-* EURCHF
-* GBPCHF
-* AUDCHF
-* CADCHF
+* USDCHF, EURCHF, GBPCHF, AUDCHF, CADCHF
 * USDHKD
 ##  getPairArray(currency: Array<string>, base: Array<string>): Array<string>
 It returns a pair array.
