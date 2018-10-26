@@ -1,10 +1,25 @@
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
+We strive for technological advancement.
 
-In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
+We respect everyone's personality.
+
+We can contribute to technological advancement, without distinction of any kind, such as race, colour, sex, language, religion, political or other opinion, national or social origin, property, birth or other status, level of experience.
+
+We must be careful that technology does not harm other people.
+
+We focus on content.
+
+We do not consider it important to know who the contributors are.
+
+We think technology should be used for all humans. That's why we maintain our MIT licenses.
 
 ## Our Standards
+
+Annotation is used only for code understanding.
+
+Don't including any political messages and opinion in the annotation.
 
 Examples of behavior that contributes to creating a positive environment include:
 
@@ -38,9 +53,5 @@ Instances of abusive, harassing, or otherwise unacceptable behavior may be repor
 
 Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 
-## Attribution
-
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4, available at [http://contributor-covenant.org/version/1/4][version]
-
-[homepage]: http://contributor-covenant.org
-[version]: http://contributor-covenant.org/version/1/4/
+## Information
+The Code of Conduct has partly amended the following: https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
