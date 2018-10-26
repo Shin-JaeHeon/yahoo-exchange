@@ -10,7 +10,7 @@ export declare function getFxYahooJapan(callback: (data: Object) => any, errorHa
 export declare function getExchangeDataArray(pair: any, callback: (data: number[], pair?: string) => any, errorHandler?: (error: Error, pair?: String) => any): void;
 /**
  * This function returns exchange data via Promise.
- * @param pair ex) USDKRW, JPYKRW. etc...
+ * @param {string|Array<string>} pair ex) USDKRW, JPYKRW.
  */
 export declare function getExchangeData(pair: string | Array<string>): Promise<Array<[number[], string]>>;
 export declare function getPairArray(currency: Array<string>, base: Array<string>): Array<string>;

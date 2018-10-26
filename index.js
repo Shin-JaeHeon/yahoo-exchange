@@ -151,7 +151,7 @@ function getExchangeDataArray(pair, callback, errorHandler = err => console.log(
 exports.getExchangeDataArray = getExchangeDataArray;
 /**
  * This function returns exchange data via Promise.
- * @param pair ex) USDKRW, JPYKRW. etc...
+ * @param {string|Array<string>} pair ex) USDKRW, JPYKRW.
  */
 function getExchangeData(pair) {
     const pairArray = typeof pair === 'string' ? [pair] : (Array.isArray(pair)) ? pair : null;

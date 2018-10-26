@@ -135,7 +135,7 @@ export function getExchangeDataArray(pair: any, callback: (data: number[], pair?
 
 /**
  * This function returns exchange data via Promise.
- * @param pair ex) USDKRW, JPYKRW. etc...
+ * @param {string|Array<string>} pair ex) USDKRW, JPYKRW.
  */
 export function getExchangeData(pair: string | Array<string>): Promise<Array<[number[], string]>> {
   const pairArray = typeof pair === 'string' ? [pair] : (Array.isArray(pair)) ? pair : null;
